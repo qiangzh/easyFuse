@@ -13,16 +13,22 @@
         
 	<http auto-config='true'>
         <intercept-url pattern="/signup*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
+        <intercept-url pattern="/saveSignup*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
 		<intercept-url pattern="/home/**" access="ROLE_USER" />			
+        <intercept-url pattern="/**/*.action*" access="ROLE_ADMIN,ROLE_USER"/>
         <form-login login-page="/login" authentication-failure-url="/login?error=true" login-processing-url="/j_security_check"/>
+        
 	</http>
 
 	<authentication-manager>
+		<authentication-provider user-service-ref="userService">
+		</authentication-provider>
+		<!-- 
 		<authentication-provider>
 			<user-service>
 				<user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
 			</user-service>
-		</authentication-provider>
+		</authentication-provider> -->
 	</authentication-manager>	
 	
 </beans:beans>

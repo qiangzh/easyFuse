@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="user" namespace="/user" extends="default">
+		<action name="*" class="userAction" method="{1}">
+			<result name="listUsers">/WEB-INF/pages/system/user/listUsers.jsp</result>	
+			<result name="listActiveUsers">/WEB-INF/pages/system/user/listActiveUsers.jsp</result>			
+			<result name="addUser">/WEB-INF/pages/system/user/addUser.jsp</result>
+			<result name="editUserProfile">/WEB-INF/pages/system/user/editUserProfile.jsp</result>	
+			<result name="reflushListUsers" type="redirectAction">listUsers</result>
+			<result name="goHome" type="redirect">/home</result>
+			<result name="success" type="redirectAction">home</result>
+			<result name="cancel" type="redirect">/</result>
+		</action>
+	</package>
+</struts>

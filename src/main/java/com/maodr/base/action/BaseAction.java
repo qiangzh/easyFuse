@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
  *  @lastModified       
  *  @history
  */
-public class BaseAction extends ActionSupport {    
+public class BaseAction extends ActionSupport {
     private static final long serialVersionUID = 3525445612504421307L;
 
     /**
@@ -97,5 +97,20 @@ public class BaseAction extends ActionSupport {
      */
     protected HttpSession getSession() {
         return getRequest().getSession();
+    }
+
+    /**
+     * 
+     *  获取Spring Bean
+     *  @param beanName
+     *  @return
+     *  @author Administrator
+     *  @created 2013年12月30日 上午6:35:11
+     *  @lastModified       
+     *  @history
+     */
+    public Object getBean(String beanName) {
+        // TODO
+        return null;
     }
 }

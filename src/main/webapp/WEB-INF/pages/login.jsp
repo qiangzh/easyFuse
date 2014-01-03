@@ -15,7 +15,7 @@
 		        <fmt:message key="errors.password.mismatch"/>
 		    </div>
 		</c:if>
-		
+				
 	    <input type="text" name="j_username" id="j_username" class="form-control"
 	           placeholder="<fmt:message key="label.username"/>" required tabindex="1">
 	    <input type="password" class="form-control" name="j_password" id="j_password" tabindex="2"

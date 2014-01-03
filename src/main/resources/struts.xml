@@ -21,5 +21,6 @@
 	</package>
 	
 	<include file="config/common/struts-common.xml"></include>
+	<include file="config/system/user/struts-system-user.xml"></include>
 	
 </struts>
