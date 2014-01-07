@@ -13,6 +13,7 @@
 	
 	<div class="col-sm-7">
 	    <s:form name="userForm" action="saveSignup" method="post" validate="true" autocomplete="off" cssClass="well">
+	    	<s:hidden key="user.enabled" value="true"/>
 	    	
 	        <s:textfield key="user.username" required="true" autofocus="true" cssClass="form-control"/>
 	

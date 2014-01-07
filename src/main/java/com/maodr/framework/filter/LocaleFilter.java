@@ -1,4 +1,4 @@
-package com.maodr.common.filter;
+package com.maodr.framework.filter;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -13,7 +13,7 @@ import javax.servlet.jsp.jstl.core.Config;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.maodr.common.Constants;
+import com.maodr.framework.Constants;
 
 /**
  * Filter to wrap request with a request including user preferred locale.

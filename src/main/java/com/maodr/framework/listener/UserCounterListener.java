@@ -1,4 +1,4 @@
-package com.maodr.common.listener;
+package com.maodr.framework.listener;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

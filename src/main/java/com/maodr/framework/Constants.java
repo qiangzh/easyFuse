@@ -1,4 +1,4 @@
-package com.maodr.common;
+package com.maodr.framework;
 
 
 /**

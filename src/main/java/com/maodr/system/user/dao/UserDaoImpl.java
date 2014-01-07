@@ -8,7 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.maodr.base.dao.BaseDaoImpl;
+import com.maodr.framework.base.dao.BaseDaoImpl;
 import com.maodr.system.user.model.UserPO;
 import com.maodr.system.user.vo.UserVO;
 

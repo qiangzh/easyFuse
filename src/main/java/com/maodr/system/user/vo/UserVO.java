@@ -31,7 +31,7 @@ public class UserVO implements Serializable, UserDetails {
 
     private String phoneNumber;
 
-    private boolean enabled;
+    private boolean enabled=true;
 
     private boolean accountExpired;
 

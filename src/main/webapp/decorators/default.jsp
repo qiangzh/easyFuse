@@ -1,3 +1,4 @@
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
 <!DOCTYPE html>
 <%@ include file="/common/taglibs.jsp"%>
 <html lang="en">
@@ -35,7 +36,7 @@
         <%@ include file="/common/messages.jsp" %>
         <div class="row">
             <decorator:body/>
-            
+                        
             <c:if test="${currentMenu == 'AdminMenu'}">
                 <div class="col-sm-2">
                 <menu:useMenuDisplayer name="Velocity" config="navlistMenu.vm" permissions="rolesAdapter">

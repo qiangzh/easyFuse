@@ -15,6 +15,7 @@
 	<div class="col-sm-7">
 	    <s:form name="userForm" action="/user/saveUser" method="post" validate="true" autocomplete="off" cssClass="well">
 	    	<s:hidden key="user.id"/>	
+	    	<s:hidden key="user.enabled" value="true"/>
 	    	    	
 	        <s:textfield key="user.username" required="true" autofocus="true" cssClass="form-control"/>
 	        	

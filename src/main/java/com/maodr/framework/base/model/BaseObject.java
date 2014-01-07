@@ -1,4 +1,4 @@
-package com.maodr.base.model;
+package com.maodr.framework.base.model;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.maodr.common.filter;
+package com.maodr.framework.filter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

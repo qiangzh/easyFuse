@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.maodr.base.action.BaseAction;
+import com.maodr.framework.base.action.BaseAction;
 import com.maodr.system.user.service.UserService;
 import com.maodr.system.user.vo.UserVO;
 
@@ -113,8 +113,8 @@ public class UserAction extends BaseAction {
         user = userService.getUser(id);
         user.setConfirmPassword(user.getPassword());
         return "addUser";
-    }  
-    
+    }
+
     /**
      * 
      *  登录用户修改信息
@@ -124,13 +124,13 @@ public class UserAction extends BaseAction {
      *  @lastModified       
      *  @history
      */
-    public String editUserProfile(){
+    public String editUserProfile() {
         HttpServletRequest request = getRequest();
         user = userService.getUserByUsername(request.getRemoteUser());
         user.setConfirmPassword(user.getPassword());
-        return "editUserProfile";        
+        return "editUserProfile";
     }
-    
+
     /**
      * 
      *  登录用户保存修改信息
@@ -145,4 +145,17 @@ public class UserAction extends BaseAction {
         return "cancel";
     }
 
+    /**
+     * 
+     *  注册用户
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月1日 下午3:38:51
+     *  @lastModified       
+     *  @history
+     */
+    public String saveSignup() {
+        userService.saveUser(user);
+        return SUCCESS;
+    }
 }

@@ -1,4 +1,4 @@
-package com.maodr.base.action;
+package com.maodr.framework.base.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -2,7 +2,7 @@ package com.maodr.system.user.dao;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.maodr.base.dao.BaseDao;
+import com.maodr.framework.base.dao.BaseDao;
 import com.maodr.system.user.model.UserPO;
 import com.maodr.system.user.vo.UserVO;
 

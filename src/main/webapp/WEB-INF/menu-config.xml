@@ -6,9 +6,10 @@
     <Menus>
         <Menu name="Home" title="home.title" page="/home" roles="ROLE_ADMIN,ROLE_USER"/>
         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/user/editUserProfile" roles="ROLE_ADMIN,ROLE_USER"/>
-        <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_ADMIN" page="/user/users">
-            <Item name="ViewUsers" title="menu.admin.users" page="/user/listUsers"/>
-            <Item name="ActiveUsers" title="home.activeUsers" page="/user/listActiveUsers"/>
+        <Menu name="AdminMenu" title="menu.sys" description="Admin Menu" roles="ROLE_ADMIN" page="/user/users">
+            <Item name="ViewUsers" title="menu.sys.users" page="/user/listUsers"/>
+            <Item name="ViewOrgs" title="menu.sys.orgs" page="/org/listOrgs"/>
+            <Item name="ActiveUsers" title="menu.sys.activeUsers" page="/user/listActiveUsers"/>
         </Menu>
         <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>
     </Menus>

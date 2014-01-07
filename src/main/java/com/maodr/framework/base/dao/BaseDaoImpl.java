@@ -1,4 +1,4 @@
-package com.maodr.base.dao;
+package com.maodr.framework.base.dao;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,8 +14,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.orm.ObjectRetrievalFailureException;
 
 public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {

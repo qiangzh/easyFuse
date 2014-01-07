@@ -1,6 +1,6 @@
 package com.maodr.common.action;
 
-import com.maodr.base.action.BaseAction;
+import com.maodr.framework.base.action.BaseAction;
 
 /**
  * 

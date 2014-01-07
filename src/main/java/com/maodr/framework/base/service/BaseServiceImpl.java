@@ -1,4 +1,4 @@
-package com.maodr.base.service;
+package com.maodr.framework.base.service;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.maodr.base.dao.BaseDao;
+import com.maodr.framework.base.dao.BaseDao;
 
 public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<T, PK> {
 

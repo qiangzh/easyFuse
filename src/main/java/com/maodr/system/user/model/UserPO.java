@@ -12,7 +12,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.GenericGenerator;
 
-import com.maodr.base.model.BaseObject;
+import com.maodr.framework.base.model.BaseObject;
 
 /**
  * 
