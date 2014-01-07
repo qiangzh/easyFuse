@@ -1,5 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8"
-	contentType="text/html;charset=utf-8"%>
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/taglibs.jsp"%>
 
 <head>
@@ -60,6 +59,18 @@
 		dojo.io.bind({
 			url : "<s:url value='/org/addOrg'/>",
 			content:{'treeNode.id':treeNodeID},
+			load : function(type, data, evt) {
+				document.getElementById('mainFrame').innerHTML=data; 
+			},
+			mimeType : "text/Html"
+		});
+	}
+	
+	// mainFrame 编辑跳转操作
+	function editTreeNode(treeNodeID,childNodeID) {
+		dojo.io.bind({
+			url : "<s:url value='/org/editOrg'/>",
+			content:{'treeNode.id':treeNodeID,'id':childNodeID},
 			load : function(type, data, evt) {
 				document.getElementById('mainFrame').innerHTML=data; 
 			},

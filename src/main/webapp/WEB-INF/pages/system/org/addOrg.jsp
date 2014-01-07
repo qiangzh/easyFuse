@@ -5,7 +5,7 @@
 </head>
 
 <body class="signup">	
-	<div class="col-sm-7">
+	<div>
 	    <s:form name="userForm" action="/org/saveOrg" method="post" validate="true" autocomplete="off" cssClass="well">
 	    	<s:hidden key="org.id"/>	
 	    	<s:hidden key="treeNode.id"/>
