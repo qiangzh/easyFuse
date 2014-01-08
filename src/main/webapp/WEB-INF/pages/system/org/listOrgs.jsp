@@ -38,7 +38,8 @@
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
 				},
-				mimeType : "text/Html"
+				mimeType : "text/Html",
+			    preventCache:true
 			});
 		}
 	
@@ -50,7 +51,8 @@
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
 				},
-				mimeType : "text/Html"
+				mimeType : "text/Html",
+			    preventCache:true
 			});
 		});
 	
@@ -72,7 +74,8 @@
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
 				},
-				mimeType : "text/Html"
+				mimeType : "text/Html",
+			    preventCache:true
 			});
 		}
 	
@@ -84,7 +87,8 @@
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
 				},
-				mimeType : "text/Html"
+				mimeType : "text/Html",
+			    preventCache:true
 			});
 		}
 	</script>

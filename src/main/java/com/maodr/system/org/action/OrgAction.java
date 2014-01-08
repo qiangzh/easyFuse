@@ -70,7 +70,7 @@ public class OrgAction extends BaseAction {
     public String saveOrg() {
         org.setParentID(treeNode.getId());
         orgService.saveOrg(org);
-        return listOrgs();
+        return "reflushListOrgs";
     }
 
     /**

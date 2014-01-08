@@ -7,7 +7,7 @@
 		<action name="*" class="orgAction" method="{1}">
 			<result name="listOrgs">/WEB-INF/pages/system/org/listOrgs.jsp</result>			
 			<result name="addOrg">/WEB-INF/pages/system/org/addOrg.jsp</result>	
-			<result name="reflushListOrgs" type="redirectAction">listOrgs</result>
+			<result name="reflushListOrgs" type="redirectAction">listOrgs?treeNode.id=${treeNode.id}</result>
 			<result name="listSubOrgs">/WEB-INF/pages/system/org/listSubOrgs.jsp</result>	
 			<result name="goHome" type="redirect">/home</result>
 			<result name="success" type="redirectAction">home</result>
