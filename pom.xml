@@ -216,17 +216,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap-datepicker</artifactId>
-			<version>${bootstrap.datepicker.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.webjars</groupId>
-					<artifactId>bootstrap</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
 			<artifactId>bootswatch</artifactId>
 			<version>${bootswath.version}</version>
 		</dependency>
@@ -296,14 +285,13 @@
 		<sitemesh.version>2.4.2</sitemesh.version>
 		<servlet.version>2.5</servlet.version>
 		<jsp.version>2.0</jsp.version>
-		<bootstrap.version>3.0.2</bootstrap.version>
+		<bootstrap.version>2.2.2</bootstrap.version>
 		<mockito.version>1.9.5</mockito.version>
 		<wro4j.version>1.6.2</wro4j.version>
 		<bootswath.version>3.0.0</bootswath.version>
-		<jquery.version>1.8.3</jquery.version>
-		<bootstrap.datepicker.version>1.2.0</bootstrap.datepicker.version>
+		<jquery.version>1.8.2</jquery.version>
 		<urlrewrite.version>4.0.3</urlrewrite.version>
-		<jquery.cookie.version>1.3.1</jquery.cookie.version>
+		<jquery.cookie.version>1.4.0</jquery.cookie.version>
 		<aspectjrt.version>1.6.1</aspectjrt.version>
 		<aspectjweaver.version>1.5.3</aspectjweaver.version>
 		<mysql.version>5.1.27</mysql.version>

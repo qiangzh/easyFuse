@@ -7,32 +7,35 @@
 
 <body class="signup">
 
-	<div class="col-sm-2">
+	<div class="span2">
 	    <h2><fmt:message key="signup.heading"/></h2>
 	    <fmt:message key="signup.message"/>
 	</div>
 	
-	<div class="col-sm-7">
-	    <s:form name="userForm" action="/user/saveUser" method="post" validate="true" autocomplete="off" cssClass="well">
+	<div class="span7">
+	    <s:form name="userForm" action="/user/saveUser" method="post" validate="true" autocomplete="off" cssClass="well form-horizontal">
 	    	<s:hidden key="user.id"/>	
 	    	<s:hidden key="user.enabled" value="true"/>
-	    	    	
-	        <s:textfield key="user.username" required="true" autofocus="true" cssClass="form-control"/>
-	        	
+	    	    
 	        <div class="row">
-	            <div class="col-sm-6">
+	            <div class="span6">	
+	        		<s:textfield key="user.username" required="true" autofocus="true" cssClass="form-control"/>
+	        	</div>
+	        </div>	        	
+	        <div class="row">
+	            <div class="span6">
 	                <s:password key="user.password" showPassword="true" required="true" cssClass="form-control"/>
 	            </div>
-	            <div class="col-sm-6">
+	            <div class="span6">
 	                <s:password key="user.confirmPassword" required="true" showPassword="true" cssClass="form-control"/>
 	            </div>
 	        </div>
 	
 	        <div class="row">
-	            <div class="col-sm-6">
+	            <div class="span6">
 	                <s:textfield key="user.email" required="true" cssClass="form-control"/>
 	            </div>
-	            <div class="col-sm-6">
+	            <div class="span6">
 	                <s:textfield key="user.phoneNumber" cssClass="form-control"/>
 	            </div>
 	        </div>

@@ -9,16 +9,17 @@
 </c:if>
 <c:choose>
     <c:when test="${sessionScope.debugAssets}">
-        <link rel="stylesheet" type="text/css" href="${base}/webjars/bootswatch/3.0.0/spacelab/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="${base}/styles/style.css"/>
-
-        <script type="text/javascript" src="${base}/webjars/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript" src="${base}/webjars/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="${base}/webjars/jquery-cookie/1.3.1/jquery.cookie.js"></script>
-        <script type="text/javascript" src="${base}/scripts/script.js"></script>
+	    <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/styles/lib/bootstrap-2.2.1.min.css'/>" />    
+	    <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/styles/lib/bootstrap-responsive-2.2.1.min.css'/>" />
+	    <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/styles/style.css'/>" /> 
+	    	    
+	    <script type="text/javascript" src="<c:url value='/scripts/lib/jquery-1.8.2.min.js'/>"></script>
+	    <script type="text/javascript" src="<c:url value='/scripts/lib/bootstrap-2.2.1.min.js'/>"></script>
+	    <script type="text/javascript" src="<c:url value='/scripts/lib/plugins/jquery.cookie.js'/>"></script>
+	    <script type="text/javascript" src="<c:url value='/scripts/script.js'/>"></script>
 	</c:when>
     <c:otherwise>
-        <link rel="stylesheet" type="text/css" href="${base}/assets/v/3.0.0/${group}.css"/>
-        <script type="text/javascript" src="${base}/assets/v/3.0.0/${group}.js"></script>
+        <link rel="stylesheet" type="text/css" href="${base}/assets/scripts/${group}.css"/>
+        <script type="text/javascript" src="${base}/assets/scripts/${group}.js"></script>
     </c:otherwise>
 </c:choose>

@@ -5,8 +5,9 @@
         <pattern>/*ajax=true*</pattern>
         <pattern>/struts/*</pattern>
         <pattern>/resources/*</pattern>
-        <pattern>*listSubOrgs.jsp</pattern>
-    </excludes> 
+        <pattern>/*listSubOrgs*jsp</pattern>
+    </excludes>
+    
     <decorator name="default" page="default.jsp">
         <pattern>/*</pattern>
     </decorator>

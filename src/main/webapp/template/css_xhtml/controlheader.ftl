@@ -21,9 +21,10 @@
  */
 -->
 <#assign hasFieldErrors = parameters.name?? && fieldErrors?? && fieldErrors[parameters.name]??/>
-<div class="form-group<#if hasFieldErrors> has-error</#if>">
+<fieldset class="control-group<#if hasFieldErrors> error</#if>">
 <#include "/${parameters.templateDir}/css_xhtml/controlheader-core.ftl">
+<div class="controls">
 <#include "/${parameters.templateDir}/css_xhtml/datepicker-check.ftl">
-<#if datepicker!false == true>
-<div class="text-right date">
+<#if datepicker?default(false) == true>
+<div class="input-append date">
 </#if>

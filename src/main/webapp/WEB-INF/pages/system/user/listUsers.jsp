@@ -5,25 +5,11 @@
 	<meta name="menu" content="AdminMenu" />
 </head>
 
-<div class="col-sm-10">
+<div class="span10">
 	<h2>
 		<fmt:message key="userList.heading" />
 	</h2>
-
-	<form method="get" action="${ctx}/user/queryUsers" id="searchForm" class="form-inline">
-		<div id="search" class="text-right">
-			<span class="col-sm-9">
-				<input type="text" size="20" name="q" id="query" value="${param.q}"
-				placeholder="<fmt:message key="search.enterTerms"/>"
-				class="form-control input-sm" />
-			</span>
-			<button id="button.search" class="btn btn-default btn-sm" type="submit">
-				<i class="icon-search"></i>
-				<fmt:message key="button.search" />
-			</button>
-		</div>
-	</form>
-
+	
 	<div id="actions" class="btn-group">
 		<a class="btn btn-primary" href="<c:url value='/user/addUser?from=list'/>"> 
 			<i class="icon-plus icon-white"></i>

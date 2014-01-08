@@ -6,15 +6,15 @@
 
 <body class="signup">	
 	<div>
-	    <s:form name="userForm" action="/org/saveOrg" method="post" validate="true" autocomplete="off" cssClass="well">
+	    <s:form name="userForm" action="/org/saveOrg" method="post" validate="true" autocomplete="off" cssClass="well form-horizontal">
 	    	<s:hidden key="org.id"/>	
 	    	<s:hidden key="treeNode.id"/>
 	    	
 	        <div class="row">
-	            <div class="col-sm-6">
+	            <div class="span6">
 	        		<s:textfield key="org.name" required="true" autofocus="true" cssClass="form-control"/>
 	            </div>
-	            <div class="col-sm-6">
+	            <div class="span6">
 	        		<s:textfield key="org.code" required="true" autofocus="true" cssClass="form-control"/>
 	            </div>
 	        </div>

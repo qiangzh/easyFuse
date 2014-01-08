@@ -70,7 +70,7 @@ public class OrgAction extends BaseAction {
     public String saveOrg() {
         org.setParentID(treeNode.getId());
         orgService.saveOrg(org);
-        return "reflushListOrgs";
+        return listOrgs();
     }
 
     /**
@@ -82,6 +82,9 @@ public class OrgAction extends BaseAction {
      *  @history
      */
     public String listOrgs() {
+        if(treeNode==null){
+            treeNode = new TreeNode("0", "组织机构");            
+        }
         orgs = orgService.listOrgs();
         return "listOrgs";
     }

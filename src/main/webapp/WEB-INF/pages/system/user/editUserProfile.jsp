@@ -5,12 +5,12 @@
     <meta name="menu" content="UserMenu"/>
 </head>
 
-<div class="col-sm-2">
+<div class="span2">
     <h2><fmt:message key="userProfile.heading"/></h2>
     <p><fmt:message key="userProfile.message"/></p>
 </div>
-<div class="col-sm-7">
-    <s:form name="userForm" action="/user/saveUserProfile" method="post" validate="true" cssClass="well" autocomplete="off">
+<div class="span7">
+    <s:form name="userForm" action="/user/saveUserProfile" method="post" validate="true" cssClass="well form-horizontal" autocomplete="off">
         <s:hidden key="user.id"/>
         <s:hidden key="user.username"/>
         <s:hidden name="user.enabled"/>
@@ -18,27 +18,31 @@
         <s:hidden name="user.accountLocked"/>
         <s:hidden name="user.credentialsExpired"/>
         <input type="hidden" name="from" value="${param.from}"/>
-
-        <s:textfield key="user.username" disabled="true" autofocus="true" cssClass="form-control"/>
         
         <div class="row">
-            <div class="col-sm-6">
+	        <div class="span6">
+	        	<s:textfield key="user.username" disabled="true" autofocus="true" cssClass="form-control"/>
+	        </div>
+        </div>  
+        
+        <div class="row">
+            <div class="span6">
                 <s:password key="user.password" showPassword="true" required="true" onchange="passwordChanged(this)" cssClass="form-control"/>
             </div>
-            <div class="col-sm-6">
+            <div class="span6">
                 <s:password key="user.confirmPassword" required="true" cssClass="form-control" showPassword="true" onchange="passwordChanged(this)"/>
             </div>
         </div>     
 
         <div class="row">
-            <div class="col-sm-6">
+            <div class="span6">
                 <s:textfield key="user.email" required="true" cssClass="form-control"/>
             </div>
-            <div class="col-sm-6">
+            <div class="span6">
                 <s:textfield key="user.phoneNumber" cssClass="form-control"/>
             </div>
         </div>
-        <div id="actions" class="form-group">
+        <div id="actions" class="form-group form-actions">
             <s:submit type="button" cssClass="btn btn-primary" method="saveUserProfile" key="button.save" theme="simple">
                 <fmt:message key="button.save"/>
             </s:submit>
