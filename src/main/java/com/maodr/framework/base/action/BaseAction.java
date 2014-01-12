@@ -110,7 +110,6 @@ public class BaseAction extends ActionSupport {
      *  @history
      */
     public Object getBean(String beanName) {
-        // TODO
         return null;
     }
 }

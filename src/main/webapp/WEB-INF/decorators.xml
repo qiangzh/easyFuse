@@ -5,7 +5,7 @@
         <pattern>/*ajax=true*</pattern>
         <pattern>/struts/*</pattern>
         <pattern>/resources/*</pattern>
-        <pattern>/*listSubOrgs*jsp</pattern>
+        <pattern>/login</pattern>
     </excludes>
     
     <decorator name="default" page="default.jsp">

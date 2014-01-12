@@ -24,10 +24,6 @@
                     <span class="icon-bar"></span>
                 </button>
                 <%@ include file="/common/menu.jsp" %>
-                <c:if test="${pageContext.request.locale.language ne 'en'}">
-                    <div id="switchLocale"><a href="<c:url value='/?locale=en'/>">English</a>
-                    </div>
-                </c:if>
             </div>
         </div>
     </div>
@@ -36,17 +32,9 @@
         <%@ include file="/common/messages.jsp" %>
         <div class="row-fluid">
             <decorator:body/>
-
-            <c:if test="${currentMenu == 'AdminMenu'}">
-                <div class="span2">
-                <menu:useMenuDisplayer name="Velocity" config="navlistMenu.vm" permissions="rolesAdapter">
-                    <menu:displayMenu name="AdminMenu"/>
-                </menu:useMenuDisplayer>
-                </div>
-            </c:if>
         </div>
     </div>
-
+    
     <div id="footer" class="navbar navbar-fixed-bottom">
         <span class="left"><fmt:message key="webapp.version"/>
             <c:if test="${pageContext.request.remoteUser != null}">

@@ -1,3 +1,4 @@
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/taglibs.jsp" %>
 
 <head>
@@ -7,11 +8,11 @@
 <body id="activeUsers">
 
 <div class="span10">
-    <h2><fmt:message key="activeUsers.heading"/></h2>
-    <p><fmt:message key="activeUsers.message"/></p>
-    
-    <display:table name="applicationScope.userNames" id="user" cellspacing="0" cellpadding="0"
-                   defaultsort="1" class="table table-condensed table-striped table-hover" pagesize="50" requestURI="">
+    <h2><fmt:message key="activeUsers.heading"/></h2>    
+	
+	<display:table id="user" name="applicationScope.userNames" requestURI="" defaultsort="1" pagesize="10" 
+		class="table table-condensed table-striped table-hover table-bordered" export="false">	
+        <display:column title="序号">${user_rowNum}</display:column> 
         <display:column property="username" escapeXml="true" style="width: 30%" titleKey="user.username"
                         sortable="true"/>
         <display:column property="email" titleKey="user.email" sortable="true" autolink="true" media="html" />		

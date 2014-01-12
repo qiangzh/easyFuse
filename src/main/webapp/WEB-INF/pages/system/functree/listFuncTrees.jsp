@@ -2,7 +2,7 @@
 <%@ include file="/common/taglibs.jsp"%>
 
 <head>
-	<title><fmt:message key="orgList.title" /></title>
+	<title><fmt:message key="funcTree.list.title" /></title>
 	<meta name="menu" content="AdminMenu" />
 	<sx:head locale="zh" parseContent="true" />
 	<script language="javaScript" type="text/javascript">
@@ -32,7 +32,7 @@
 		
 		function treeNodeSelected1(node) {
 			dojo.io.bind({
-				url : "<s:url value='/org/listSubOrgs'/>",
+				url : "<s:url value='/functree/listSubFuncTrees'/>",
 				content : {'treeNode.id' : node.node.widgetId},
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
@@ -45,7 +45,7 @@
 		//点击树的节点时候触发的事件
 		dojo.event.topic.subscribe("treeSelected", function treeNodeSelected(node) {
 			dojo.io.bind({
-				url : "<s:url value='/org/listSubOrgs'/>",
+				url : "<s:url value='/functree/listSubFuncTrees'/>",
 				content : {'treeNode.id' : node.node.widgetId},
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
@@ -68,7 +68,7 @@
 		// mainFrame 添加跳转操作
 		function addTreeNode(treeNodeID) {
 			dojo.io.bind({
-				url : "<s:url value='/org/addOrg'/>",
+				url : "<s:url value='/functree/addFuncTree'/>",
 				content : {'treeNode.id' : treeNodeID},
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
@@ -81,7 +81,7 @@
 		// mainFrame 编辑跳转操作
 		function editTreeNode(treeNodeID, childNodeID) {
 			dojo.io.bind({
-				url : "<s:url value='/org/editOrg'/>",
+				url : "<s:url value='/functree/editFuncTree'/>",
 				content : {'treeNode.id' : treeNodeID,'id' : childNodeID},
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
@@ -93,7 +93,7 @@
 	</script>
 </head>
 <body class="signup">
-	<h2>组织机构</h2>
+	<h2><fmt:message key="funcTree.list.heading" /></h2>
 
 	<div class="span2" id="leftFrame">
 		<sx:tree id="orgTree" rootNode="treeRootNode"
@@ -102,5 +102,5 @@
 			expandedNotifyTopics="treeExpanded">
 		</sx:tree>
 	</div>
-	<div class="span8" id="mainFrame"></div>
+	<div class="span7" id="mainFrame"></div>
 </body>

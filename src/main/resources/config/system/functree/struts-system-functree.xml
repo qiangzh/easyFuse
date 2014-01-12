@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="functree" namespace="/functree" extends="default">
+		<action name="*" class="funcTreeAction" method="{1}">
+			<result name="listFuncTrees">/WEB-INF/pages/system/functree/listFuncTrees.jsp</result>			
+			<result name="addFuncTree">/WEB-INF/pages/system/functree/addFuncTree.jsp</result>	
+			<result name="reflushListFuncTrees" type="redirectAction">listFuncTrees?treeNode.id=${treeNode.id}</result>
+			<result name="listSubFuncTrees">/WEB-INF/pages/system/functree/listSubFuncTrees.jsp</result>	
+			<result name="goHome" type="redirect">/home</result>
+			<result name="success" type="redirectAction">home</result>
+			<result name="cancel" type="redirect">/</result>
+		</action>
+	</package>
+</struts>

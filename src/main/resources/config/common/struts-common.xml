@@ -16,6 +16,9 @@
 		<action name="signup">
 			<result>/WEB-INF/pages/signup.jsp</result>
 		</action>	
+		<action name="develop">
+			<result>/WEB-INF/pages/develop.jsp</result>
+		</action>
 		<action name="saveSignup" class="userAction" method="saveSignup">
 			<result name="cancel" type="redirect">/</result>
 			<result name="input">/WEB-INF/pages/signup.jsp</result>

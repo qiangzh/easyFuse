@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true">
+
+	<bean id="funcTreeAction" class="com.maodr.system.functree.action.FuncTreeAction" scope="prototype">	
+		<property name="funcTreeService" ref="funcTreeService"/> 
+	</bean>
+	<bean id="funcTreeService" class="com.maodr.system.functree.service.FuncTreeServiceImpl">	
+    	<property name="funcTreeDao" ref="funcTreeDao"/>
+	</bean>	
+	<bean id="funcTreeDao" class="com.maodr.system.functree.dao.FuncTreeDaoImpl">	
+        <property name="sessionFactory" ref="sessionFactory"/>	
+	</bean>
+</beans>

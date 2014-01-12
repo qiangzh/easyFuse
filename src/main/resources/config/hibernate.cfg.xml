@@ -5,5 +5,6 @@
 	<session-factory>		
         <mapping class="com.maodr.system.user.model.UserPO"/>
         <mapping class="com.maodr.system.org.model.OrgPO"/>
+        <mapping class="com.maodr.system.functree.model.FuncTreePO"/>       
 	</session-factory>
 </hibernate-configuration>
