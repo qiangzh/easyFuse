@@ -7,7 +7,8 @@
 		<Menu name="Home" title="home.title" page="/home" roles="ROLE_ADMIN,ROLE_USER" />
 		<Menu name="StaffMenu" title="人事管理" description="Staff Menu" roles="ROLE_ADMIN,ROLE_USER">
 			<Item name="org" title="组织机构" page="/org/listOrgs" />
-			<Item name="role" title="角色管理" page="/functree/listFuncTrees" />
+			<Item name="funcTree" title="功能管理" page="/functree/listFuncTrees" />
+			<Item name="role" title="角色管理" page="/role/listRoles" />
 			<Item name="staff" title="人员管理" page="/user/listUsers" />
 			<Item name="satisfaction" title="客户满意度" page="/develop" />
 		</Menu>
@@ -26,10 +27,10 @@
 			<Item name="activity" title=" 促销活动" page="/develop" />
 		</Menu>
 		<Menu name="SystemMenu" title="menu.sys" description="Admin Menu" roles="ROLE_ADMIN,ROLE_USER">
-			<Item name="ViewUsers" title="menu.user" page="/user/editUserProfile" />
-			<Item name="ActiveUsers" title=" 会话管理" page="/user/listActiveUsers" />
-			<Item name="ViewOrgs" title="日志查询" page="/develop" />
-			<Item name="ViewOrgs" title="系统配置" page="/develop" />
+			<Item name="editProfile" title="menu.user" page="/user/editUserProfile" />
+			<Item name="activeUsers" title=" 会话管理" page="/user/listActiveUsers" />
+			<Item name="logQuery" title="日志查询" page="/develop" />
+			<Item name="sysConfig" title="系统配置" page="/develop" />
 		</Menu>
 		<Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER" />
 	</Menus>

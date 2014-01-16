@@ -20,6 +20,9 @@
 		<display:column title="" media="html">
 			<a onclick="editTreeNode('${treeNode.id}','${org.id}');">修改</a>
         </display:column>
+		<display:column title="" media="html">
+			<a onclick="deleteTreeNode('${treeNode.id}','${org.id}');">删除</a>
+        </display:column>
 		<display:setProperty name="paging.banner.item_name">机构</display:setProperty>
 		<display:setProperty name="paging.banner.items_name">机构</display:setProperty>
 	</display:table>

@@ -1,7 +1,5 @@
 package com.maodr.system.user.dao;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
 import com.maodr.framework.base.dao.BaseDao;
 import com.maodr.system.user.model.UserPO;
 import com.maodr.system.user.vo.UserVO;
@@ -38,6 +36,6 @@ public interface UserDao extends BaseDao<UserPO, String> {
      *  @lastModified       
      *  @history
      */
-    public UserDetails loadUserByUsername(String username);
+    public UserVO loadUserByUsername(String username);
 
 }

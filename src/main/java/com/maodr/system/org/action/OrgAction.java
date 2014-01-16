@@ -72,6 +72,21 @@ public class OrgAction extends BaseAction {
         orgService.saveOrg(org);
         return "reflushListOrgs";
     }
+    
+    /**
+     * 
+     *  删除组织机构
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月13日 下午9:20:03
+     *  @lastModified       
+     *  @history
+     */
+    public String deleteOrg() {
+        org.setParentID(treeNode.getId());
+        orgService.deleteOrg(org.getId());
+        return "reflushListOrgs";
+    }
 
     /**
      * 

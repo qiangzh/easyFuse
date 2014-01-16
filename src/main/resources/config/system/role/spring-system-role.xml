@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true">
+
+	<bean id="roleAction" class="com.maodr.system.role.action.RoleAction" scope="prototype">	
+		<property name="roleService" ref="roleService"/> 
+	</bean>
+	<bean id="roleService" class="com.maodr.system.role.service.RoleServiceImpl">	
+    	<property name="roleDao" ref="roleDao"/>
+	</bean>	
+	<bean id="roleDao" class="com.maodr.system.role.dao.RoleDaoImpl">	
+        <property name="sessionFactory" ref="sessionFactory"/>	
+	</bean>
+</beans>

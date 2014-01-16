@@ -11,10 +11,7 @@
 
 <ul class="glassList">
     <li>
-        <a href="<c:url value='/editProfile'/>"><fmt:message key="menu.user"/></a>
-    </li>
-    <li>
-        <a href="<c:url value='/selectFile'/>"><fmt:message key="menu.selectFile"/></a>
+        <a href="<c:url value='/user/editUserProfile'/>"><fmt:message key="menu.user"/></a>
     </li>
 </ul>
 </body>

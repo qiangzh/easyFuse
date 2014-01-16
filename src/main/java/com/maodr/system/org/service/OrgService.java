@@ -60,4 +60,15 @@ public interface OrgService {
      */
     public List<OrgVO> listSubOrgs(String treeNodeID);
 
+    /**
+     * 
+     *  删除组织机构
+     *  @param org
+     *  @author Administrator
+     *  @created 2014年1月13日 下午9:20:50
+     *  @lastModified       
+     *  @history
+     */
+    public void deleteOrg(String id);
+
 }

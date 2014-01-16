@@ -89,12 +89,17 @@
 				mimeType : "text/Html",
 			    preventCache:true
 			});
+		}		
+		// mainFrame 删除跳转操作
+		function deleteTreeNode(treeNodeID, childNodeID) {
+			var url = '<s:url value='/org/deleteOrg'/>'+'?treeNode.id='+treeNodeID+'&org.id='+childNodeID;
+			document.orgForm.action =url;
+			document.orgForm.submit();
 		}
 	</script>
 </head>
 <body class="signup">
 	<h2>组织机构</h2>
-
 	<div class="span2" id="leftFrame">
 		<sx:tree id="orgTree" rootNode="treeRootNode"
 			childCollectionProperty="children" nodeIdProperty="id"
@@ -103,4 +108,5 @@
 		</sx:tree>
 	</div>
 	<div class="span8" id="mainFrame"></div>
+	<s:form name="orgForm" action="/org/deleteOrg" method="post"></s:form>
 </body>

@@ -10,18 +10,23 @@
     <http pattern="/styles/**" security="none"/>
     <http pattern="/scripts/**" security="none"/>
     <http pattern="/assets/**" security="none"/>
-        
-	<http auto-config='true'>
+    <http pattern="/pages/error/**" security="none"/>
+                
+	<http auto-config="true" access-denied-page="/WEB-INF/pages/error/403.jsp">
         <intercept-url pattern="/signup*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
         <intercept-url pattern="/saveSignup*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
 		<intercept-url pattern="/home/**" access="ROLE_USER" />			
         <intercept-url pattern="/**/*.action*" access="ROLE_ADMIN,ROLE_USER"/>
         <form-login login-page="/login" authentication-failure-url="/login?error=true" login-processing-url="/j_security_check"/>
-        
+        <session-management>
+        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="false"/> 
+        </session-management>
+        <custom-filter ref="securityFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+        <!-- <access-denied-handler ref="accessDeniedHandler" error-page="/WEB-INF/pages/error/error.jsp"/> -->   
 	</http>
 
-	<authentication-manager>
-		<authentication-provider user-service-ref="userService">
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailService">
 		</authentication-provider>
 		<!-- 
 		<authentication-provider>
@@ -29,6 +34,26 @@
 				<user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
 			</user-service>
 		</authentication-provider> -->
-	</authentication-manager>	
+	</authentication-manager>
 	
+	<!-- 自定义过滤器 -->
+	<beans:bean id="securityFilter" class="com.maodr.security.SecFilterSecurityInterceptor"> 
+		<!-- 用户拥有的权限 -->
+        <beans:property name="authenticationManager" ref="authenticationManager" /> 
+        <!-- 用户是否拥有所请求资源的权限 -->
+        <beans:property name="accessDecisionManager" ref="accessDecisionManagerBean" />
+        <!-- 资源与权限对应关系 -->
+        <beans:property name="securityMetadataSource" ref="securityMetadataSource" /> 
+    </beans:bean>
+        
+    <beans:bean id="userDetailService" class="com.maodr.security.SecUserDetailService" >
+    	<beans:property name="userService" ref="userService"/> 
+	</beans:bean>	
+    <beans:bean id="accessDecisionManagerBean" class="com.maodr.security.SecAccessDecisionManager" /> 
+    <beans:bean id="securityMetadataSource" class="com.maodr.security.SecInvocationSecurityMetadataSource" />
+    
+    <!-- 异常拦截 -->
+    <beans:bean id="accessDeniedHandler" class="com.maodr.security.SecAccessDeniedHandler"/>
+    
+    
 </beans:beans>

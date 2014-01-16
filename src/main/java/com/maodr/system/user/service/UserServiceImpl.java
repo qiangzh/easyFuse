@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.maodr.system.user.dao.UserDao;
 import com.maodr.system.user.model.UserPO;
@@ -20,7 +17,7 @@ import com.maodr.system.user.vo.UserVO;
  *  @lastModified       
  *  @history
  */
-public class UserServiceImpl implements UserService,UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
 
@@ -52,7 +49,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         }
         return voList;
     }
-    
+
     /**
      * 
      *  获取用户信息
@@ -62,28 +59,14 @@ public class UserServiceImpl implements UserService,UserDetailsService {
      *  @lastModified       
      *  @history
      */
-    public UserVO getUser(String id){
+    public UserVO getUser(String id) {
         UserPO userPO = userDao.get(id);
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(userPO, userVO);
         return userVO;
-        
+
     }
 
-    /**
-     *  登录
-     *  @param username
-     *  @return
-     *  @throws UsernameNotFoundException
-     *  @author Administrator
-     *  @created 2014年1月3日 上午5:04:25
-     *  @lastModified      
-     *  @history
-     */
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userDao.loadUserByUsername(username);
-    }
-    
     /**
      * 
      *  获取用户信息
@@ -94,9 +77,9 @@ public class UserServiceImpl implements UserService,UserDetailsService {
      *  @lastModified       
      *  @history
      */
-    public UserVO getUserByUsername(String username){
+    public UserVO getUserByUsername(String username) {
         return (UserVO) userDao.loadUserByUsername(username);
-        
+
     }
 
 }

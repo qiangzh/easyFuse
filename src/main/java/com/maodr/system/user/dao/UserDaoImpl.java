@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.BeanUtils;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.maodr.framework.base.dao.BaseDaoImpl;
@@ -56,7 +56,7 @@ public class UserDaoImpl extends BaseDaoImpl<UserPO, String> implements UserDao 
      *  @lastModified      
      *  @history
      */
-    public UserDetails loadUserByUsername(String username) {
+    public UserVO loadUserByUsername(String username) {
         List users = getSession().createCriteria(UserPO.class).add(Restrictions.eq("username", username)).list();
         if (users == null || users.isEmpty()) {
             throw new UsernameNotFoundException("user '" + username + "' not found...");

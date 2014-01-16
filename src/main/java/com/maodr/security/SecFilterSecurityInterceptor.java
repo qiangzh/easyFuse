@@ -15,18 +15,24 @@ import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
-public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
+/**
+ * 
+ *  该过滤器的主要作用就是通过spring的IoC生成securityMetadataSource
+ *  @author Administrator
+ *  @created 2014年1月17日 上午6:19:04
+ *  @lastModified       
+ *  @history
+ */
+public class SecFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
 
     private FilterInvocationSecurityMetadataSource securityMetadataSource;
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
-            ServletException {
-        FilterInvocation fi = new FilterInvocation(request, response, chain);
-        invoke(fi);
-    }
-
     public FilterInvocationSecurityMetadataSource getSecurityMetadataSource() {
         return this.securityMetadataSource;
+    }
+
+    public void setSecurityMetadataSource(FilterInvocationSecurityMetadataSource newSource) {
+        this.securityMetadataSource = newSource;
     }
 
     public Class<? extends Object> getSecureObjectClass() {
@@ -47,14 +53,18 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
         return this.securityMetadataSource;
     }
 
-    public void setSecurityMetadataSource(FilterInvocationSecurityMetadataSource newSource) {
-        this.securityMetadataSource = newSource;
-    }
-
-    public void destroy() {
+    @Override
+    public void init(FilterConfig arg0) throws ServletException {
     }
 
     @Override
-    public void init(FilterConfig arg0) throws ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+            ServletException {
+        FilterInvocation fi = new FilterInvocation(request, response, chain);
+        invoke(fi);
+    }
+
+    @Override
+    public void destroy() {
     }
 }

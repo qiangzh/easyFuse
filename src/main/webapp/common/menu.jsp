@@ -14,7 +14,7 @@
     <menu:displayMenu name="SystemMenu"/>
     <menu:displayMenu name="Logout"/>
     <c:forEach var="menu" items="${repository.topMenus}">
-    	<menu-el:displayMenu name="${menu.name}"/>
+    	<menu:displayMenu name="${menu.name}"/>
     </c:forEach>   
 </ul>
 </div>
