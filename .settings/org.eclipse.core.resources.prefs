@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/pages/error/403.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/error/404.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/home.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/login.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/logout.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/signup.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/system/org/listSubOrgs.jsp=UTF-8
+encoding//src/main/webapp/common/menu.jsp=UTF-8
+encoding//src/main/webapp/common/messages.jsp=UTF-8
+encoding//src/main/webapp/decorators/default.jsp=UTF-8
+encoding//src/main/webapp/index.jsp=UTF-8
+encoding/<project>=UTF-8
