@@ -1,4 +1,4 @@
-package com.maodr.system.functree.model;
+package com.maodr.system.model;
 
 import java.io.Serializable;
 
@@ -14,30 +14,26 @@ import com.maodr.framework.base.model.BaseObject;
 
 /**
  * 
- *  功能树PO
+ *  组织机构PO
  *  @author Administrator
  *  @created 2013年12月31日 上午4:05:24
  *  @lastModified       
  *  @history
  */
 @Entity
-@Table(name = "T_SYS_FUNCTREE")
-public class FuncTreePO extends BaseObject implements Serializable {
+@Table(name = "T_SYS_ORG")
+public class OrgPO extends BaseObject implements Serializable {
     private static final long serialVersionUID = 3832626162173359413L;
 
     private String id;
 
-    private String code; // required 
+    private String name; // required
 
-    private String name; // required    
-
-    private String url; // required       
-
-    private String type; // required   
-
+    private String code; // required   
+    
     private String parentID; // required  
 
-    public FuncTreePO() {
+    public OrgPO() {
     }
 
     @Id
@@ -48,25 +44,15 @@ public class FuncTreePO extends BaseObject implements Serializable {
         return id;
     }
 
-    @Column(name = "C_CODE", nullable = false, unique = true)
-    public String getCode() {
-        return code;
-    }
-
-    @Column(name = "C_NAME", nullable = false, unique = true)
+    @Column(name = "C_NAME", nullable = false, length = 50, unique = true)
     public String getName() {
         return name;
     }
 
-    @Column(name = "C_URL", nullable = false, unique = true)
-    public String getUrl() {
-        return url;
-    }
-
-    @Column(name = "C_TYPE", nullable = false, unique = true)
-    public String getType() {
-        return type;
-    }
+    @Column(name = "C_CODE", nullable = false)
+    public String getCode() {
+        return code;
+    }  
 
     @Column(name = "C_PARENTID", nullable = false)
     public String getParentID() {
@@ -77,24 +63,21 @@ public class FuncTreePO extends BaseObject implements Serializable {
         this.id = id;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setParentID(String parentID) {
+        this.parentID = parentID;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setParentID(String parentID) {
-        this.parentID = parentID;
+    @Override
+    public String toString() {
+        return "OrgPO [id=" + id + ", name=" + name + ", code=" + code + "]";
     }
 
     @Override
@@ -102,6 +85,8 @@ public class FuncTreePO extends BaseObject implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((code == null) ? 0 : code.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
     }
 
@@ -113,20 +98,26 @@ public class FuncTreePO extends BaseObject implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        FuncTreePO other = (FuncTreePO) obj;
+        OrgPO other = (OrgPO) obj;
         if (code == null) {
             if (other.code != null)
                 return false;
         }
         else if (!code.equals(other.code))
             return false;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        }
+        else if (!id.equals(other.id))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        }
+        else if (!name.equals(other.name))
+            return false;
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "FuncTreePO [id=" + id + ", code=" + code + ", name=" + name + ", url=" + url + ", type=" + type
-                + ", parentID=" + parentID + "]";
     }
 
 }

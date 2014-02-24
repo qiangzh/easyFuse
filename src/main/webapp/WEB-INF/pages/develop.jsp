@@ -6,7 +6,9 @@
 </head>
 
 <body>
-	<div class="span7">		
-	    <h5>该功能正在开发中</h5>
+	<div class="container-fluid">
+		<div class="row-fluid">		
+	    	<h5>该功能正在开发中</h5>
+	    </div>
 	</div>
 </body>

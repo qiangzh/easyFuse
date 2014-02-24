@@ -22,9 +22,17 @@ public interface BaseDao<T, PK extends Serializable> {
 
     public T get(PK id);
 
+    public <M> M get(Class<M> clazz, PK id);
+
     public boolean exists(PK id);
 
     public T save(T object);
+
+    public <M> M save(Class<M> clazz, M object);
+
+    public List<T> saveBatch(List<T> list);
+
+    public <M> List<M> saveBatch(Class<M> clazz, List<M> list);
 
     public void remove(T object);
 

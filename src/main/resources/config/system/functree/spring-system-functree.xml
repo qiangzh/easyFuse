@@ -4,9 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 	default-lazy-init="true">
 
-	<bean id="funcTreeAction" class="com.maodr.system.functree.action.FuncTreeAction" scope="prototype">	
-		<property name="funcTreeService" ref="funcTreeService"/> 
-	</bean>
+	<bean id="funcTreeAction" class="com.maodr.system.functree.action.FuncTreeAction" scope="prototype"/>
 	<bean id="funcTreeService" class="com.maodr.system.functree.service.FuncTreeServiceImpl">	
     	<property name="funcTreeDao" ref="funcTreeDao"/>
 	</bean>	

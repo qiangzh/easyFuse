@@ -2,6 +2,7 @@ package com.maodr.system.user.service;
 
 import java.util.List;
 
+import com.maodr.system.functree.vo.FuncTreeVO;
 import com.maodr.system.user.vo.UserVO;
 
 /**
@@ -59,5 +60,17 @@ public interface UserService {
      *  @history
      */
     public UserVO getUserByUsername(String remoteUser);
+    
+    /**
+     * 
+     *  获取用户授权的功能菜单
+     *  @param treeNodeID
+     *  @return
+     *  @author Administrator
+     *  @created 2014年2月15日 上午8:16:00
+     *  @lastModified       
+     *  @history
+     */
+    public List<FuncTreeVO> listUserFuncTrees(String userName);
 
 }

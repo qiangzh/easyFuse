@@ -4,9 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 	default-lazy-init="true">
 
-	<bean id="userAction" class="com.maodr.system.user.action.UserAction" scope="prototype">	
-		<property name="userService" ref="userService"/> 
-	</bean>
+	<bean id="userAction" class="com.maodr.system.user.action.UserAction" scope="prototype"/>
 	<bean id="userService" class="com.maodr.system.user.service.UserServiceImpl">	
     	<property name="userDao" ref="userDao"/>
 	</bean>	

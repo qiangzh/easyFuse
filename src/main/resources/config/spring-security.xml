@@ -17,7 +17,7 @@
         <intercept-url pattern="/saveSignup*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
 		<intercept-url pattern="/home/**" access="ROLE_USER" />			
         <intercept-url pattern="/**/*.action*" access="ROLE_ADMIN,ROLE_USER"/>
-        <form-login login-page="/login" authentication-failure-url="/login?error=true" login-processing-url="/j_security_check"/>
+        <form-login login-page="/login" authentication-success-handler-ref="authenticationSuccessHandler" authentication-failure-url="/login?error=true" login-processing-url="/j_security_check"/>
         <session-management>
         	<concurrency-control max-sessions="1" error-if-maximum-exceeded="false"/> 
         </session-management>
@@ -50,10 +50,11 @@
     	<beans:property name="userService" ref="userService"/> 
 	</beans:bean>	
     <beans:bean id="accessDecisionManagerBean" class="com.maodr.security.SecAccessDecisionManager" /> 
-    <beans:bean id="securityMetadataSource" class="com.maodr.security.SecInvocationSecurityMetadataSource" />
-    
+    <beans:bean id="securityMetadataSource" class="com.maodr.security.SecInvocationSecurityMetadataSource" />    
     <!-- 异常拦截 -->
     <beans:bean id="accessDeniedHandler" class="com.maodr.security.SecAccessDeniedHandler"/>
+    <beans:bean id="authenticationSuccessHandler" class="com.maodr.security.SecAuthenticationSuccessHandler"/>
+    
     
     
 </beans:beans>

@@ -61,11 +61,23 @@ public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {
         return new ArrayList<T>(result);
     }
 
-    @SuppressWarnings("unchecked")
     public T get(PK id) {
         Session sess = getSession();
         IdentifierLoadAccess byId = sess.byId(persistentClass);
         T entity = (T) byId.load(id);
+
+        if (entity == null) {
+            log.warn("Uh oh, '" + this.persistentClass + "' object with id '" + id + "' not found...");
+            throw new ObjectRetrievalFailureException(this.persistentClass, id);
+        }
+
+        return entity;
+    }
+
+    public <M> M get(Class<M> clazz, PK id) {
+        Session sess = getSession();
+        IdentifierLoadAccess byId = sess.byId(clazz);
+        M entity = (M) byId.load(id);
 
         if (entity == null) {
             log.warn("Uh oh, '" + this.persistentClass + "' object with id '" + id + "' not found...");
@@ -87,6 +99,45 @@ public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {
     public T save(T object) {
         Session sess = getSession();
         return (T) sess.merge(object);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <M> M save(Class<M> clazz, M object) {
+        Session sess = getSession();
+        return (M) sess.merge(object);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<T> saveBatch(List<T> list) {
+        int i = 0;
+        List<T> resultList = new ArrayList<T>();
+        Session session = getSession();
+        for (T object : list) {
+            i++;
+            T result = (T) session.merge(object);
+            resultList.add(result);
+            if (i % 50 == 0) {
+                session.flush();
+                session.clear();
+            }
+        }
+        return resultList;
+    }
+
+    public <M> List<M> saveBatch(Class<M> clazz, List<M> list) {
+        int i = 0;
+        List<M> resultList = new ArrayList<M>();
+        Session session = getSession();
+        for (M object : list) {
+            i++;
+            M result = (M) session.merge(object);
+            resultList.add(result);
+            if (i % 50 == 0) {
+                session.flush();
+                session.clear();
+            }
+        }
+        return resultList;
     }
 
     public void remove(T object) {

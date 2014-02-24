@@ -8,6 +8,10 @@
 			<result name="listRoles">/WEB-INF/pages/system/role/listRoles.jsp</result>			
 			<result name="addRole">/WEB-INF/pages/system/role/addRole.jsp</result>
 			<result name="reflushListRoles" type="redirectAction">listRoles</result>
+			<result name="listUserOfRole">/WEB-INF/pages/system/role/listUserOfRole.jsp</result>		
+			<result name="listRoleFuncTree">/WEB-INF/pages/system/role/listRoleFuncTree.jsp</result>		
+			<result name="setRolePermission">/WEB-INF/pages/system/role/setRolePermission.jsp</result>	
+			<result name="reflushListRoleFuncTree" type="redirectAction">listRoleFuncTree</result>		
 			<result name="goHome" type="redirect">/home</result>
 			<result name="success" type="redirectAction">home</result>
 			<result name="cancel" type="redirect">/</result>

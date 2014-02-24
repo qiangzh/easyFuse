@@ -3,8 +3,8 @@ package com.maodr.system.functree.dao;
 import java.util.List;
 
 import com.maodr.framework.base.dao.BaseDao;
-import com.maodr.system.functree.model.FuncTreePO;
 import com.maodr.system.functree.vo.FuncTreeVO;
+import com.maodr.system.model.FuncTreePO;
 
 /**
  * 

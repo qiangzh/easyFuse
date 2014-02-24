@@ -8,6 +8,7 @@ import org.apache.struts2.ServletActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.maodr.framework.util.ApplicationContextProvider;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -110,6 +111,6 @@ public class BaseAction extends ActionSupport {
      *  @history
      */
     public Object getBean(String beanName) {
-        return null;
+        return ApplicationContextProvider.getBean(beanName);
     }
 }

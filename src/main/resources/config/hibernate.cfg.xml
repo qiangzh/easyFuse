@@ -3,9 +3,11 @@
 
 <hibernate-configuration>
 	<session-factory>		
-        <mapping class="com.maodr.system.user.model.UserPO"/>
-        <mapping class="com.maodr.system.role.model.RolePO"/> 
-        <mapping class="com.maodr.system.org.model.OrgPO"/>
-        <mapping class="com.maodr.system.functree.model.FuncTreePO"/>       
+        <mapping class="com.maodr.system.model.UserPO"/>
+        <mapping class="com.maodr.system.model.RolePO"/> 
+        <mapping class="com.maodr.system.model.UserRolePO"/> 
+        <mapping class="com.maodr.system.model.OrgPO"/>
+        <mapping class="com.maodr.system.model.FuncTreePO"/> 
+        <mapping class="com.maodr.system.model.RoleFuncTreePO"/>      
 	</session-factory>
 </hibernate-configuration>

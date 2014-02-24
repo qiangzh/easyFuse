@@ -3,7 +3,7 @@ package com.maodr.system.org.dao;
 import java.util.List;
 
 import com.maodr.framework.base.dao.BaseDao;
-import com.maodr.system.org.model.OrgPO;
+import com.maodr.system.model.OrgPO;
 import com.maodr.system.org.vo.OrgVO;
 
 /**

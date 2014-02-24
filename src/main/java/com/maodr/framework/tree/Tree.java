@@ -1,7 +1,6 @@
 package com.maodr.framework.tree;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Tree implements Serializable {

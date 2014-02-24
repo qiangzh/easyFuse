@@ -22,13 +22,13 @@ public class FuncTreeAction extends BaseAction {
 
     private static final long serialVersionUID = 1L;
 
+    private FuncTreeService funcTreeService = (FuncTreeService) this.getBean("funcTreeService");
+
     private FuncTreeVO funcTree;
 
-    private List<FuncTreeVO> funcTrees;
+    private List<FuncTreeVO> funcTrees; //功能树列表
 
     private TreeNode treeNode;
-
-    private FuncTreeService funcTreeService;
 
     public FuncTreeVO getFuncTree() {
         return funcTree;
@@ -53,11 +53,7 @@ public class FuncTreeAction extends BaseAction {
     public void setTreeNode(TreeNode treeNode) {
         this.treeNode = treeNode;
     }
-
-    public void setFuncTreeService(FuncTreeService funcTreeService) {
-        this.funcTreeService = funcTreeService;
-    }
-
+    
     /**
      * 
      *  添加功能树

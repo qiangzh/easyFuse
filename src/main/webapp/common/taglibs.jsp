@@ -10,6 +10,7 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <%@ taglib uri="/struts-dojo-tags" prefix="sx"%>
+<%@ taglib uri="/WEB-INF/tlds/easyFuse.tld" prefix="d"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>

@@ -1,12 +1,16 @@
 package com.maodr.system.user.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.maodr.system.role.vo.RoleVO;
 
 /**
  * 
@@ -31,13 +35,15 @@ public class UserVO implements Serializable, UserDetails {
 
     private String phoneNumber;
 
-    private boolean enabled=true;
+    private boolean enabled = true;
 
     private boolean accountExpired;
 
     private boolean accountLocked;
 
     private boolean credentialsExpired;
+
+    private List<RoleVO> roleList = new ArrayList();
 
     public String getId() {
         return id;
@@ -117,6 +123,14 @@ public class UserVO implements Serializable, UserDetails {
 
     public void setCredentialsExpired(boolean credentialsExpired) {
         this.credentialsExpired = credentialsExpired;
+    }
+
+    public List<RoleVO> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<RoleVO> roleList) {
+        this.roleList = roleList;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

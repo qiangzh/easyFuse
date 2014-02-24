@@ -10,8 +10,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.BeanUtils;
 
 import com.maodr.framework.base.dao.BaseDaoImpl;
-import com.maodr.system.functree.model.FuncTreePO;
 import com.maodr.system.functree.vo.FuncTreeVO;
+import com.maodr.system.model.FuncTreePO;
 
 /**
  * 

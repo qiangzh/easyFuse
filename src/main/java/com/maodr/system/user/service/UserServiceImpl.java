@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import com.maodr.system.functree.vo.FuncTreeVO;
+import com.maodr.system.model.UserPO;
+import com.maodr.system.role.vo.RoleVO;
 import com.maodr.system.user.dao.UserDao;
-import com.maodr.system.user.model.UserPO;
 import com.maodr.system.user.vo.UserVO;
 
 /**
@@ -26,7 +28,16 @@ public class UserServiceImpl implements UserService {
     }
 
     public String saveUser(UserVO userVO) {
-        return userDao.saveOrUpdateUser(userVO);
+        // 保存或更新User信息
+        String userID = userDao.saveOrUpdateUser(userVO);
+
+        // 删除已有角色
+        userDao.deleteUserRoleByUserID(userID);
+
+        // 添加新角色
+        userDao.saveUserRole(userID, userVO.getRoleList());
+
+        return userID;
     }
 
     /**
@@ -59,10 +70,13 @@ public class UserServiceImpl implements UserService {
      *  @lastModified       
      *  @history
      */
-    public UserVO getUser(String id) {
-        UserPO userPO = userDao.get(id);
-        UserVO userVO = new UserVO();
-        BeanUtils.copyProperties(userPO, userVO);
+    public UserVO getUser(String userID) {
+        // 获取用户信息
+        UserVO userVO = userDao.getUser(userID);
+
+        // 获取用户角色
+        List<RoleVO> roleList = userDao.getUserRole(userID);
+        userVO.setRoleList(roleList);
         return userVO;
 
     }
@@ -79,7 +93,20 @@ public class UserServiceImpl implements UserService {
      */
     public UserVO getUserByUsername(String username) {
         return (UserVO) userDao.loadUserByUsername(username);
+    }
 
+    /**
+     * 
+     *  获取用户授权的功能菜单
+     *  @param treeNodeID
+     *  @return
+     *  @author Administrator
+     *  @created 2014年2月15日 上午8:16:00
+     *  @lastModified       
+     *  @history
+     */
+    public List<FuncTreeVO> listUserFuncTrees(String userName) {
+        return userDao.listUserFuncTrees(userName);
     }
 
 }

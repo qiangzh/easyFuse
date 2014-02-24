@@ -92,15 +92,19 @@
 		}
 	</script>
 </head>
-<body class="signup">
-	<h2><fmt:message key="funcTree.list.heading" /></h2>
-
-	<div class="span2" id="leftFrame">
-		<sx:tree id="orgTree" rootNode="treeRootNode"
-			childCollectionProperty="children" nodeIdProperty="id"
-			nodeTitleProperty="name" value="id" treeSelectedTopic="treeSelected"
-			expandedNotifyTopics="treeExpanded">
-		</sx:tree>
+<body>
+	<div class="container-fluid">
+		<h2><fmt:message key="funcTree.list.heading" /></h2>
+		<div class="row-fluid">
+			<div class="span2" id="leftFrame">
+				<sx:tree id="orgTree" rootNode="treeRootNode"
+					childCollectionProperty="children" nodeIdProperty="id"
+					nodeTitleProperty="name" value="id"
+					treeSelectedTopic="treeSelected"
+					expandedNotifyTopics="treeExpanded">
+				</sx:tree>
+			</div>
+			<div class="span7" id="mainFrame"></div>
+		</div>
 	</div>
-	<div class="span7" id="mainFrame"></div>
 </body>

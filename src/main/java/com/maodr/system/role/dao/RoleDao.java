@@ -1,8 +1,12 @@
 package com.maodr.system.role.dao;
 
+import java.util.List;
+
 import com.maodr.framework.base.dao.BaseDao;
-import com.maodr.system.role.model.RolePO;
+import com.maodr.system.model.RolePO;
+import com.maodr.system.role.vo.RoleFuncTreeVO;
 import com.maodr.system.role.vo.RoleVO;
+import com.maodr.system.user.vo.UserVO;
 
 /**
  * 
@@ -26,5 +30,40 @@ public interface RoleDao extends BaseDao<RolePO, String> {
      */
     public String saveOrUpdateRole(RoleVO roleVO);
 
+    /**
+     * 
+     *  查看已分配用户
+     *  @param roleID
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月19日 下午2:52:40
+     *  @lastModified       
+     *  @history
+     */
+    public List<UserVO> listUserOfRole(String roleID); 
+    
+    /**
+     * 
+     *  获取角色在该功能上的权限
+     *  @param roleID
+     *  @param funcTreeID
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月23日 上午5:38:41
+     *  @lastModified       
+     *  @history
+     */
+    public RoleFuncTreeVO getRoleFuncTree(String roleID, String funcTreeID); 
+    
+    /**
+     * 
+     *  保存角色在该功能上的权限
+     *  @param roleFuncTreeVO
+     *  @author Administrator
+     *  @created 2014年1月23日 上午5:54:30
+     *  @lastModified       
+     *  @history
+     */
+    public RoleFuncTreeVO saveRoleFuncTree(RoleFuncTreeVO roleFuncTreeVO);
 
 }

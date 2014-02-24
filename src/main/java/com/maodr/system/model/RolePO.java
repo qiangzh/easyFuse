@@ -1,4 +1,4 @@
-package com.maodr.system.role.model;
+package com.maodr.system.model;
 
 import java.io.Serializable;
 

@@ -1,12 +1,19 @@
 package com.maodr.system.role.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.maodr.framework.base.action.BaseAction;
+import com.maodr.framework.model.LabelValue;
+import com.maodr.framework.tree.TreeNode;
+import com.maodr.system.functree.service.FuncTreeService;
+import com.maodr.system.functree.vo.FuncTreeVO;
 import com.maodr.system.role.service.RoleService;
+import com.maodr.system.role.vo.RoleFuncTreeVO;
 import com.maodr.system.role.vo.RoleVO;
+import com.maodr.system.user.vo.UserVO;
 
 /**
  * 
@@ -20,11 +27,21 @@ public class RoleAction extends BaseAction {
 
     private static final long serialVersionUID = 1L;
 
-    private RoleVO role;
+    private RoleService roleService = (RoleService) this.getBean("roleService");
 
-    private List<RoleVO> roles;
+    private FuncTreeService funcTreeService = (FuncTreeService) this.getBean("funcTreeService");
 
-    private RoleService roleService;
+    private RoleVO role; // 角色
+
+    private List<UserVO> users; // 用户列表
+
+    private List<RoleVO> roles; // 角色列表
+
+    private List<FuncTreeVO> funcTrees; // 功能树
+
+    private List<LabelValue> chkRolelist = new ArrayList<LabelValue>(); // 权限选中框
+
+    private RoleFuncTreeVO roleFuncTreeVO;
 
     public RoleVO getRole() {
         return role;
@@ -42,8 +59,36 @@ public class RoleAction extends BaseAction {
         this.roles = roles;
     }
 
-    public void setRoleService(RoleService roleService) {
-        this.roleService = roleService;
+    public List<UserVO> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserVO> users) {
+        this.users = users;
+    }
+
+    public List<FuncTreeVO> getFuncTrees() {
+        return funcTrees;
+    }
+
+    public void setFuncTrees(List<FuncTreeVO> funcTrees) {
+        this.funcTrees = funcTrees;
+    }
+
+    public List<LabelValue> getChkRolelist() {
+        return chkRolelist;
+    }
+
+    public void setChkRolelist(List<LabelValue> chkRolelist) {
+        this.chkRolelist = chkRolelist;
+    }
+
+    public RoleFuncTreeVO getRoleFuncTreeVO() {
+        return roleFuncTreeVO;
+    }
+
+    public void setRoleFuncTreeVO(RoleFuncTreeVO roleFuncTreeVO) {
+        this.roleFuncTreeVO = roleFuncTreeVO;
     }
 
     /**
@@ -140,5 +185,120 @@ public class RoleAction extends BaseAction {
     public String saveSignup() {
         roleService.saveRole(role);
         return SUCCESS;
+    }
+
+    /**
+     * 
+     *  查看已分配用户
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月19日 下午2:50:53
+     *  @lastModified       
+     *  @history
+     */
+    public String listUserOfRole() {
+        HttpServletRequest request = getRequest();
+        String roleID = request.getParameter("id");
+        users = roleService.listUserOfRole(roleID);
+        return "listUserOfRole";
+
+    }
+
+    /**
+     * 
+     *  显示角色权限设置页面
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月20日 上午5:29:17
+     *  @lastModified       
+     *  @history
+     */
+    public String listRoleFuncTree() {
+        HttpServletRequest request = getRequest();
+        String roleID = request.getParameter("roleFuncTreeVO.roleID");
+        roleFuncTreeVO = new RoleFuncTreeVO();
+        roleFuncTreeVO.setRoleID(roleID);
+        return "listRoleFuncTree";
+    }
+
+    /**
+     * 
+     *  角色权限设置页面
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月20日 上午5:29:17
+     *  @lastModified       
+     *  @history
+     */
+    public String setRolePermission() {
+        chkRolelist = new ArrayList<LabelValue>();
+        chkRolelist.add(new LabelValue("0", "无权限"));
+        chkRolelist.add(new LabelValue("1", "有权限"));
+
+        HttpServletRequest request = getRequest();
+        String roleID = request.getParameter("roleFuncTreeVO.roleID");
+        String funcTreeID = request.getParameter("roleFuncTreeVO.funcTreeID");
+        roleFuncTreeVO = roleService.getRoleFuncTree(roleID, funcTreeID);
+        if (roleFuncTreeVO == null) {
+            roleFuncTreeVO = new RoleFuncTreeVO();
+            roleFuncTreeVO.setRoleID(roleID);
+            roleFuncTreeVO.setFuncTreeID(funcTreeID);
+            roleFuncTreeVO.setHasPermission("0");
+        }else{
+            roleFuncTreeVO.setHasPermission("1");            
+        }
+        return "setRolePermission";
+    }
+
+    /**
+     * 
+     *  保存角色权限设置
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月22日 上午4:26:35
+     *  @lastModified       
+     *  @history
+     */
+    public String saveRolePermission() {
+        roleFuncTreeVO = roleService.saveRoleFuncTree(roleFuncTreeVO);
+        return "listRoleFuncTree";
+    }
+
+    /**
+     * 
+     *  获取功能树树
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月6日 上午7:54:12
+     *  @lastModified       
+     *  @history
+     */
+    public TreeNode getTreeRootNode() {
+        TreeNode treeNode = new TreeNode("0", "功能树");
+        List<TreeNode> childrenList = this.getChildrenNode(treeNode.getId());
+        treeNode.setChildren(childrenList);
+        return treeNode;
+    }
+
+    /**
+     * 
+     *  获取子节点
+     *  @param nodeID
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月22日 上午4:14:29
+     *  @lastModified       
+     *  @history
+     */
+    public List<TreeNode> getChildrenNode(String nodeID) {
+        List<TreeNode> childrenList = new ArrayList<TreeNode>();
+        List<FuncTreeVO> subFuncTreeList = funcTreeService.listSubFuncTrees(nodeID);
+        for (FuncTreeVO funcTreeVO : subFuncTreeList) {
+            TreeNode subTreeNode = new TreeNode(funcTreeVO.getId(), funcTreeVO.getName());
+            childrenList.add(subTreeNode);
+            List<TreeNode> subTreeChildrenList = this.getChildrenNode(subTreeNode.getId());
+            subTreeNode.setChildren(subTreeChildrenList);
+        }
+        return childrenList;
     }
 }

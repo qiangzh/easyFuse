@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import com.maodr.system.model.RolePO;
 import com.maodr.system.role.dao.RoleDao;
-import com.maodr.system.role.model.RolePO;
+import com.maodr.system.role.vo.RoleFuncTreeVO;
 import com.maodr.system.role.vo.RoleVO;
+import com.maodr.system.user.vo.UserVO;
 
 /**
  * 
@@ -64,7 +66,49 @@ public class RoleServiceImpl implements RoleService {
         RoleVO roleVO = new RoleVO();
         BeanUtils.copyProperties(rolePO, roleVO);
         return roleVO;
+    }
 
+    /**
+     * 
+     *  查看已分配用户
+     *  @param roleID
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月19日 下午2:52:40
+     *  @lastModified       
+     *  @history
+     */
+    public List<UserVO> listUserOfRole(String roleID){
+        return roleDao.listUserOfRole(roleID);        
+    }
+    
+    /**
+     * 
+     *  获取角色在该功能上的权限
+     *  @param roleID
+     *  @param funcTreeID
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月23日 上午5:38:41
+     *  @lastModified       
+     *  @history
+     */
+    public RoleFuncTreeVO getRoleFuncTree(String roleID, String funcTreeID){
+        return roleDao.getRoleFuncTree(roleID,funcTreeID);       
+    }
+    
+    /**
+     * 
+     *  保存角色在该功能上的权限
+     *  @param roleFuncTreeVO
+     *  @author Administrator
+     *  @created 2014年1月23日 上午5:54:30
+     *  @lastModified       
+     *  @history
+     */
+    public RoleFuncTreeVO saveRoleFuncTree(RoleFuncTreeVO roleFuncTreeVO){
+        return roleDao.saveRoleFuncTree(roleFuncTreeVO);  
+        
     }
 
 }

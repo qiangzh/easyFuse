@@ -10,7 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.BeanUtils;
 
 import com.maodr.framework.base.dao.BaseDaoImpl;
-import com.maodr.system.org.model.OrgPO;
+import com.maodr.system.model.OrgPO;
 import com.maodr.system.org.vo.OrgVO;
 
 /**

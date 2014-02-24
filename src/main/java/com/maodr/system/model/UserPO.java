@@ -1,4 +1,4 @@
-package com.maodr.system.user.model;
+package com.maodr.system.model;
 
 import java.io.Serializable;
 
@@ -51,6 +51,7 @@ public class UserPO extends BaseObject implements Serializable {
     public UserPO(final String username) {
         this.username = username;
     }
+
     @Id
     @GenericGenerator(name = "generator", strategy = "uuid.hex")
     @GeneratedValue(generator = "generator")

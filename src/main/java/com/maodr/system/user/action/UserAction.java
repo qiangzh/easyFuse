@@ -1,10 +1,13 @@
 package com.maodr.system.user.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.maodr.framework.base.action.BaseAction;
+import com.maodr.system.role.service.RoleService;
+import com.maodr.system.role.vo.RoleVO;
 import com.maodr.system.user.service.UserService;
 import com.maodr.system.user.vo.UserVO;
 
@@ -20,11 +23,21 @@ public class UserAction extends BaseAction {
 
     private static final long serialVersionUID = 1L;
 
-    private UserVO user;
+    private UserService userService = (UserService) this.getBean("userService");
 
-    private List<UserVO> users;
+    private RoleService roleService = (RoleService) this.getBean("roleService");
 
-    private UserService userService;
+    private UserVO user; // 用户信息
+
+    private List<UserVO> users; // 用户列表
+
+    private String[] leftRoles; // 左侧角色列表返回值
+
+    private String[] rightRoles; // 右侧角色列表返回值
+
+    private List<RoleVO> leftRoleList = new ArrayList<RoleVO>(); // 左侧角色列表
+
+    private List<RoleVO> rightRoleList = new ArrayList<RoleVO>(); // 右侧角色列表
 
     public UserVO getUser() {
         return user;
@@ -42,8 +55,36 @@ public class UserAction extends BaseAction {
         this.users = users;
     }
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public List<RoleVO> getLeftRoleList() {
+        return leftRoleList;
+    }
+
+    public void setLeftRoleList(List<RoleVO> leftRoleList) {
+        this.leftRoleList = leftRoleList;
+    }
+
+    public List<RoleVO> getRightRoleList() {
+        return rightRoleList;
+    }
+
+    public void setRightRoleList(List<RoleVO> rightRoleList) {
+        this.rightRoleList = rightRoleList;
+    }
+
+    public String[] getLeftRoles() {
+        return leftRoles;
+    }
+
+    public void setLeftRoles(String[] leftRoles) {
+        this.leftRoles = leftRoles;
+    }
+
+    public String[] getRightRoles() {
+        return rightRoles;
+    }
+
+    public void setRightRoles(String[] rightRoles) {
+        this.rightRoles = rightRoles;
     }
 
     /**
@@ -56,6 +97,17 @@ public class UserAction extends BaseAction {
      *  @history
      */
     public String saveUser() {
+        // 封装UserVO数据
+        List<RoleVO> roleList = new ArrayList<RoleVO>();
+        RoleVO roleVO = null;
+        for (String roleID : rightRoles) {
+            roleVO = new RoleVO();
+            roleVO.setId(roleID);
+            roleList.add(roleVO);
+        }
+        user.setRoleList(roleList);
+
+        // 保存数据
         userService.saveUser(user);
         return "reflushListUsers";
     }
@@ -96,6 +148,7 @@ public class UserAction extends BaseAction {
      *  @history
      */
     public String addUser() {
+        leftRoleList = roleService.listRoles();
         return "addUser";
     }
 
@@ -111,6 +164,15 @@ public class UserAction extends BaseAction {
         HttpServletRequest request = getRequest();
         String id = request.getParameter("id");
         user = userService.getUser(id);
+
+        // 右侧角色列表
+        rightRoleList = user.getRoleList();
+
+        // 左侧角色列表
+        List<RoleVO> allRoleList = roleService.listRoles();
+        allRoleList.removeAll(rightRoleList);
+        leftRoleList = allRoleList;
+
         user.setConfirmPassword(user.getPassword());
         return "addUser";
     }

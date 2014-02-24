@@ -98,15 +98,19 @@
 		}
 	</script>
 </head>
-<body class="signup">
-	<h2>组织机构</h2>
-	<div class="span2" id="leftFrame">
-		<sx:tree id="orgTree" rootNode="treeRootNode"
-			childCollectionProperty="children" nodeIdProperty="id"
-			nodeTitleProperty="name" value="id" treeSelectedTopic="treeSelected"
-			expandedNotifyTopics="treeExpanded">
-		</sx:tree>
+<body>
+	<div class="container-fluid">
+		<h2>组织机构</h2>
+		<div class="row-fluid">
+			<div class="span2" id="leftFrame">
+				<sx:tree id="orgTree" rootNode="treeRootNode"
+					childCollectionProperty="children" nodeIdProperty="id"
+					nodeTitleProperty="name" value="id" treeSelectedTopic="treeSelected"
+					expandedNotifyTopics="treeExpanded">
+				</sx:tree>
+			</div>
+			<div class="span8" id="mainFrame"></div>
+			<s:form name="orgForm" action="/org/deleteOrg" method="post"></s:form>
+		</div>
 	</div>
-	<div class="span8" id="mainFrame"></div>
-	<s:form name="orgForm" action="/org/deleteOrg" method="post"></s:form>
 </body>

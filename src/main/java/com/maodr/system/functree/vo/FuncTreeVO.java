@@ -1,6 +1,10 @@
 package com.maodr.system.functree.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.maodr.framework.tree.TreeNode;
 
 /**
  * 
@@ -24,6 +28,12 @@ public class FuncTreeVO implements Serializable {
     private String type; // 类型功能点|功能树
 
     private String parentID; // 父节点
+
+    // 附加字段
+
+    private boolean hasChild = false;
+
+    private List<FuncTreeVO> children = new ArrayList<FuncTreeVO>();
 
     public String getId() {
         return id;
@@ -71,6 +81,22 @@ public class FuncTreeVO implements Serializable {
 
     public void setParentID(String parentID) {
         this.parentID = parentID;
+    }
+
+    public boolean isHasChild() {
+        return hasChild;
+    }
+
+    public void setHasChild(boolean hasChild) {
+        this.hasChild = hasChild;
+    }
+
+    public List<FuncTreeVO> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<FuncTreeVO> children) {
+        this.children = children;
     }
 
 }

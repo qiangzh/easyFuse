@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import com.maodr.system.model.OrgPO;
 import com.maodr.system.org.dao.OrgDao;
-import com.maodr.system.org.model.OrgPO;
 import com.maodr.system.org.vo.OrgVO;
 
 /**

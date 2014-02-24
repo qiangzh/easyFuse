@@ -22,13 +22,13 @@ public class OrgAction extends BaseAction {
 
     private static final long serialVersionUID = 1L;
 
-    private OrgVO org;
+    private OrgService orgService = (OrgService) this.getBean("orgService");
 
-    private List<OrgVO> orgs;
+    private OrgVO org; // 组织机构
 
-    private TreeNode treeNode;
+    private List<OrgVO> orgs; // 组织结构列表
 
-    private OrgService orgService;
+    private TreeNode treeNode; // 组织机构树节点
 
     public OrgVO getOrg() {
         return org;
@@ -54,10 +54,6 @@ public class OrgAction extends BaseAction {
         this.treeNode = treeNode;
     }
 
-    public void setOrgService(OrgService orgService) {
-        this.orgService = orgService;
-    }
-
     /**
      * 
      *  添加组织机构
@@ -72,7 +68,7 @@ public class OrgAction extends BaseAction {
         orgService.saveOrg(org);
         return "reflushListOrgs";
     }
-    
+
     /**
      * 
      *  删除组织机构
@@ -97,8 +93,8 @@ public class OrgAction extends BaseAction {
      *  @history
      */
     public String listOrgs() {
-        if(treeNode==null){
-            treeNode = new TreeNode("0", "组织机构");            
+        if (treeNode == null) {
+            treeNode = new TreeNode("0", "组织机构");
         }
         orgs = orgService.listOrgs();
         return "listOrgs";
@@ -142,21 +138,21 @@ public class OrgAction extends BaseAction {
      */
     public TreeNode getTreeRootNode() {
         TreeNode treeNode = new TreeNode("0", "组织机构");
-        List<TreeNode> childrenList =this.getChildrenNode(treeNode.getId());
+        List<TreeNode> childrenList = this.getChildrenNode(treeNode.getId());
         treeNode.setChildren(childrenList);
         return treeNode;
     }
-    
-    public List<TreeNode> getChildrenNode(String nodeID){
+
+    public List<TreeNode> getChildrenNode(String nodeID) {
         List<TreeNode> childrenList = new ArrayList<TreeNode>();
         List<OrgVO> subOrgList = orgService.listSubOrgs(nodeID);
-        for(OrgVO orgVO:subOrgList){
+        for (OrgVO orgVO : subOrgList) {
             TreeNode subTreeNode = new TreeNode(orgVO.getId(), orgVO.getName());
-            childrenList.add(subTreeNode); 
-            List<TreeNode> subTreeChildrenList =this.getChildrenNode(subTreeNode.getId());
+            childrenList.add(subTreeNode);
+            List<TreeNode> subTreeChildrenList = this.getChildrenNode(subTreeNode.getId());
             subTreeNode.setChildren(subTreeChildrenList);
         }
-        return childrenList; 
+        return childrenList;
     }
 
     /**

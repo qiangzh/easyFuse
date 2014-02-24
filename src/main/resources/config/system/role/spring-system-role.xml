@@ -4,9 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 	default-lazy-init="true">
 
-	<bean id="roleAction" class="com.maodr.system.role.action.RoleAction" scope="prototype">	
-		<property name="roleService" ref="roleService"/> 
-	</bean>
+	<bean id="roleAction" class="com.maodr.system.role.action.RoleAction" scope="prototype"/>
 	<bean id="roleService" class="com.maodr.system.role.service.RoleServiceImpl">	
     	<property name="roleDao" ref="roleDao"/>
 	</bean>	
