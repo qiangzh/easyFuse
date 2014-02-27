@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/maodr/framework/listener/UserCounterListener.java=UTF-8
 encoding//src/main/webapp/WEB-INF/pages/error/403.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/pages/error/404.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/pages/home.jsp=UTF-8

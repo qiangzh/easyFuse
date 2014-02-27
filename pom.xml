@@ -43,6 +43,11 @@
 			<version>${struts.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-sitemesh-plugin</artifactId>
+			<version>${struts.version}</version>
+		</dependency>
+		<dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-dojo-plugin</artifactId>
 			<version>${struts.version}</version>
@@ -191,11 +196,6 @@
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>${standard.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>opensymphony</groupId>
-			<artifactId>sitemesh</artifactId>
-			<version>${sitemesh.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>struts-menu</groupId>

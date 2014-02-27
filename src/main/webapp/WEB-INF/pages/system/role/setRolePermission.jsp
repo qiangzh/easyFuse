@@ -18,7 +18,7 @@
 				</div>
 	        </div>	
 	        <div id="actions" class="form-group form-actions">
-	            <s:submit type="button" cssClass="btn btn-primary" key="button.register" theme="simple">
+	            <s:submit type="button" cssclass="btn btn-mini btn-primary" key="button.register" theme="simple">
 	                <i class="icon-ok icon-white"></i>
 	                <fmt:message key="button.register"/>
 	            </s:submit>

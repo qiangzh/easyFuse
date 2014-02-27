@@ -10,7 +10,7 @@
 		<h2><fmt:message key="userList.heading" /></h2>
 		<div class="row-fluid">
 			<div id="actions" class="btn-group">
-				<a class="btn btn-primary" href="<c:url value='/user/addUser?from=list'/>"> 
+				<a class="btn btn-mini btn-primary" href="<c:url value='/user/addUser?from=list'/>"> 
 					<i class="icon-plus icon-white"></i>
 					<fmt:message key="button.add" />
 				</a>

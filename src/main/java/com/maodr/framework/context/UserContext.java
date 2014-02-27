@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.maodr.framework.Constants;
+
 public class UserContext {
 
     private HttpServletRequest request;
@@ -16,8 +18,6 @@ public class UserContext {
     private HttpServletResponse response;
 
     private String contextPath = null;
-
-    private List menuList = new ArrayList();
 
     protected static ThreadLocal threadLocal = new ThreadLocal();
 
@@ -33,11 +33,15 @@ public class UserContext {
     }
 
     public List getMenuList() {
+        List menuList = (List) this.getSessionAttribute(Constants.MENU_REPOSITORY_KEY);
+        if (menuList == null) {
+            menuList = new ArrayList();
+        }
         return menuList;
     }
 
     public void setMenuList(List menuList) {
-        this.menuList = menuList;
+        this.setSessionAttribute(Constants.MENU_REPOSITORY_KEY, (Serializable) menuList);
     }
 
     static public UserContext getCurrentContext() {

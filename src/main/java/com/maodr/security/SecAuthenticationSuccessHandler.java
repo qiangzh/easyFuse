@@ -41,7 +41,6 @@ public class SecAuthenticationSuccessHandler implements AuthenticationSuccessHan
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
-        UserContext.setCurrentContext(request, response);
         setMenu(user);
         // 跳转到主页
         response.sendRedirect("home");

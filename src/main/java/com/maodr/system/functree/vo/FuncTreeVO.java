@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.maodr.framework.tree.TreeNode;
-
 /**
  * 
  *  功能树VO
@@ -26,6 +24,8 @@ public class FuncTreeVO implements Serializable {
     private String url; // 功能URL
 
     private String type; // 类型功能点|功能树
+
+    private String sort; // 排序
 
     private String parentID; // 父节点
 
@@ -73,6 +73,14 @@ public class FuncTreeVO implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 
     public String getParentID() {

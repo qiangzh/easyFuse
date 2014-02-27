@@ -6,7 +6,7 @@
 </head>
 <div class="span15">	
 	<div id="actions" class="btn-group">
-		<a class="btn btn-primary" onclick="addTreeNode('${treeNode.id}');"> 
+		<a class="btn btn-mini btn-primary" onclick="addTreeNode('${treeNode.id}');"> 
 			<i class="icon-plus icon-white"></i>
 			<fmt:message key="button.add" />
 		</a>

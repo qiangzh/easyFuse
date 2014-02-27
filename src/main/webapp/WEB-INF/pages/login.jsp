@@ -62,7 +62,7 @@
 						
 				        <div class="row-fluid">
 				            <div class="offset5 span2">
-								<button type="submit" class="btn btn-lg" name="login" tabindex="4">
+								<button type="submit" class="btn btn-block btn-lg" name="login" tabindex="4">
 									<fmt:message key='button.login' />
 								</button>
 							</div>

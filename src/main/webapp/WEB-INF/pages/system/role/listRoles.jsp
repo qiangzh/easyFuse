@@ -24,7 +24,7 @@
 		<h2><fmt:message key="role.list.heading" /></h2>
 		<div class="row-fluie">
 			<div id="actions" class="btn-group">
-				<a class="btn btn-primary" href="<c:url value='/role/addRole?from=list'/>"> 
+				<a class="btn btn-mini btn-primary" href="<c:url value='/role/addRole?from=list'/>"> 
 					<i class="icon-plus icon-white"></i>
 					<fmt:message key="button.add" />
 				</a>

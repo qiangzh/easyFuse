@@ -49,10 +49,10 @@
 					</div>
 					<div id="actions" class="form-group form-actions">
 						<div class="row-fluid">
-							<s:submit type="button" cssClass="btn btn-primary" method="saveUserProfile" key="button.save" theme="simple">
+							<s:submit type="button" cssclass="btn btn-mini btn-primary" method="saveUserProfile" key="button.save" theme="simple">
 								<fmt:message key="button.save" />
 							</s:submit>
-							<s:submit type="button" cssClass="btn btn-default" method="cancel" key="button.cancel" theme="simple">
+							<s:submit type="button" cssclass="btn btn-mini btn-default" method="cancel" key="button.cancel" theme="simple">
 								<fmt:message key="button.cancel" />
 							</s:submit>
 						</div>

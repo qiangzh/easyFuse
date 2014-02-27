@@ -74,7 +74,7 @@
 		<s:hidden id="roleFuncTreeVO.roleID" key="roleFuncTreeVO.roleID" />
 		<div class="row-fluid">
 			<div id="actions">
-				<a href="./listRoles" class="btn btn-default"><i
+				<a href="./listRoles" class="btn btn-mini btn-default"><i
 					class="icon-remove"></i> <fmt:message key="button.cancel" /></a>
 			</div>
 		</div>

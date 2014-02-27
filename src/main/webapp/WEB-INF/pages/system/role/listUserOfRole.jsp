@@ -24,7 +24,7 @@
 		</div>
 		<div class="row-fluid">	
 			<div id="actions" class="btn-group">
-		           <a href="./listRoles" class="btn btn-default"><i class="icon-remove"></i><fmt:message key="button.cancel"/></a>
+		           <a href="./listRoles" class="btn btn-mini btn-default"><i class="icon-remove"></i><fmt:message key="button.cancel"/></a>
 		    </div>
 	    </div>
 	</div>

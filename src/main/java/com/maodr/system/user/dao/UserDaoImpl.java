@@ -184,6 +184,7 @@ public class UserDaoImpl extends BaseDaoImpl<UserPO, String> implements UserDao 
         hql.append("   and roleFuncTreePO.roleID = userRolePO.roleID");
         hql.append("   and userRolePO.userID = userPO.id");
         hql.append("   and userPO.username = :username");
+        hql.append(" order by funcTreePO.sort asc");
 
         Query query = getSession().createQuery(hql.toString());
         query.setParameter("username", userName);

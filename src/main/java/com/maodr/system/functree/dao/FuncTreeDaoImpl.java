@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.BeanUtils;
 
@@ -62,6 +63,7 @@ public class FuncTreeDaoImpl extends BaseDaoImpl<FuncTreePO, String> implements 
         Session sess = getSession();
         Criteria crit = sess.createCriteria(FuncTreePO.class);
         crit.add(Restrictions.eq("parentID", treeNodeID));
+        crit.addOrder(Order.asc("sort"));
         crit.setMaxResults(10);
         List<FuncTreePO> poList = crit.list();
         List<FuncTreeVO> voList = new ArrayList();

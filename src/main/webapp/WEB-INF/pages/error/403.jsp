@@ -13,7 +13,7 @@
     </fmt:message>
 </p>
 <p style="text-align: center">
-    <a href="<c:url value='/home'/>" class="btn btn-default">
+    <a href="<c:url value='/home'/>" class="btn btn-mini btn-default">
     	<fmt:message key="button.cancel"/>
     </a>
 </p>

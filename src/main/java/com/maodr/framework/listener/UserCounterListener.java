@@ -20,47 +20,25 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 
 import com.maodr.system.user.vo.UserVO;
 
-
-/**
- * UserCounterListener class used to count the current number
- * of active users for the applications.  Does this by counting
- * how many user objects are stuffed into the session.  It also grabs
- * these users and exposes them in the servlet context.
- *
- * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
- */
 public class UserCounterListener implements ServletContextListener, HttpSessionAttributeListener, HttpSessionListener {
-    /**
-     * Name of user counter variable
-     */
+
     public static final String COUNT_KEY = "userCounter";
-    /**
-     * Name of users Set in the ServletContext
-     */
+
     public static final String USERS_KEY = "userNames";
-    /**
-     * The default event we're looking to trap.
-     */
+
     public static final String EVENT_KEY = HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
+
     private transient ServletContext servletContext;
+
     private int counter;
+
     private Set<UserVO> users;
 
-    /**
-     * Initialize the context
-     *
-     * @param sce the event
-     */
     public synchronized void contextInitialized(ServletContextEvent sce) {
         servletContext = sce.getServletContext();
         servletContext.setAttribute((COUNT_KEY), Integer.toString(counter));
     }
 
-    /**
-     * Set the servletContext, users and counter to null
-     *
-     * @param event The servletContextEvent
-     */
     public synchronized void contextDestroyed(ServletContextEvent event) {
         servletContext = null;
         users = null;
@@ -111,12 +89,6 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
         decrementUserCounter();
     }
 
-    /**
-     * This method is designed to catch when user's login and record their name
-     *
-     * @param event the event to process
-     * @see javax.servlet.http.HttpSessionAttributeListener#attributeAdded(javax.servlet.http.HttpSessionBindingEvent)
-     */
     public void attributeAdded(HttpSessionBindingEvent event) {
         if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
             SecurityContext securityContext = (SecurityContext) event.getValue();
@@ -137,12 +109,6 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
         return true;
     }
 
-    /**
-     * When user's logout, remove their name from the hashMap
-     *
-     * @param event the session binding event
-     * @see javax.servlet.http.HttpSessionAttributeListener#attributeRemoved(javax.servlet.http.HttpSessionBindingEvent)
-     */
     public void attributeRemoved(HttpSessionBindingEvent event) {
         if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
             SecurityContext securityContext = (SecurityContext) event.getValue();
@@ -154,13 +120,6 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
         }
     }
 
-    /**
-     * Needed for Acegi Security 1.0, as it adds an anonymous user to the session and
-     * then replaces it after authentication. http://forum.springframework.org/showthread.php?p=63593
-     *
-     * @param event the session binding event
-     * @see javax.servlet.http.HttpSessionAttributeListener#attributeReplaced(javax.servlet.http.HttpSessionBindingEvent)
-     */
     public void attributeReplaced(HttpSessionBindingEvent event) {
         if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
             final SecurityContext securityContext = (SecurityContext) event.getValue();
@@ -171,10 +130,10 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
             }
         }
     }
-    
-    public void sessionCreated(HttpSessionEvent se) { 
+
+    public void sessionCreated(HttpSessionEvent se) {
     }
-    
+
     public void sessionDestroyed(HttpSessionEvent se) {
         Object obj = se.getSession().getAttribute(EVENT_KEY);
         if (obj != null) {
