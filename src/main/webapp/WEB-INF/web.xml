@@ -24,6 +24,7 @@
 		<param-value>en</param-value>
 	</context-param>
 	<!-- filter -->
+	
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -35,7 +36,7 @@
 			<param-name>forceEncoding</param-name>
 			<param-value>true</param-value>
 		</init-param>
-	</filter>
+	</filter>	
 
 	<filter>
 		<filter-name>wroFilter</filter-name>

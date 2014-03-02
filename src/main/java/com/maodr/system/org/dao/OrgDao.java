@@ -39,5 +39,16 @@ public interface OrgDao extends BaseDao<OrgPO, String> {
      *  @history
      */
     public List<OrgVO> listSubOrgs(String treeNodeID);
+    
+    /**
+     * 
+     *  获取根节点
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月7日 上午6:53:22
+     *  @lastModified       
+     *  @history
+     */
+    public OrgVO getRootOrg();
 
 }

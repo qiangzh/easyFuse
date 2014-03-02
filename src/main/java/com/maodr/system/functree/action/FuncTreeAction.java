@@ -79,7 +79,7 @@ public class FuncTreeAction extends BaseAction {
      */
     public String listFuncTrees() {
         if(treeNode==null){
-            treeNode = new TreeNode("0", "功能树");            
+            treeNode = new TreeNode("0", "0", "功能树");            
         }
         funcTrees = funcTreeService.listFuncTrees();
         return "listFuncTrees";
@@ -122,7 +122,7 @@ public class FuncTreeAction extends BaseAction {
      *  @history
      */
     public TreeNode getTreeRootNode() {
-        TreeNode treeNode = new TreeNode("0", "功能树");
+        TreeNode treeNode = new TreeNode("0", "0", "功能树");
         List<TreeNode> childrenList =this.getChildrenNode(treeNode.getId());
         treeNode.setChildren(childrenList);
         return treeNode;
@@ -132,7 +132,7 @@ public class FuncTreeAction extends BaseAction {
         List<TreeNode> childrenList = new ArrayList<TreeNode>();
         List<FuncTreeVO> subFuncTreeList = funcTreeService.listSubFuncTrees(nodeID);
         for(FuncTreeVO funcTreeVO:subFuncTreeList){
-            TreeNode subTreeNode = new TreeNode(funcTreeVO.getId(), funcTreeVO.getName());
+            TreeNode subTreeNode = new TreeNode(funcTreeVO.getId(),funcTreeVO.getCode(), funcTreeVO.getName());
             childrenList.add(subTreeNode); 
             List<TreeNode> subTreeChildrenList =this.getChildrenNode(subTreeNode.getId());
             subTreeNode.setChildren(subTreeChildrenList);
@@ -153,10 +153,10 @@ public class FuncTreeAction extends BaseAction {
     public String listSubFuncTrees() {
         if (!"0".equals(treeNode.getId())) {
             FuncTreeVO funcTreeVO = funcTreeService.getFuncTree(treeNode.getId());
-            treeNode = new TreeNode(funcTreeVO.getId(), funcTreeVO.getName());
+            treeNode = new TreeNode(funcTreeVO.getId(), funcTreeVO.getCode(), funcTreeVO.getName());
         }
         else {
-            treeNode = new TreeNode("0", "功能树");
+            treeNode = new TreeNode("0", "0", "功能树");
         }
         funcTrees = funcTreeService.listSubFuncTrees(treeNode.getId());
         return "listSubFuncTrees";

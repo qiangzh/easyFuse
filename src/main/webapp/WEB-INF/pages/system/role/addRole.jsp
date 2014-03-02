@@ -17,10 +17,10 @@
 	    	<s:hidden key="role.id"/>	
 	        <div class="row">
 	            <div class="span6">
-	                <s:textfield name="role.roleCode" key="role.code" required="true" cssClass="form-control"/>
+	                <s:textfield name="role.roleCode" key="role.code" cssClass="form-control" required="true" maxLength="10"/>
 	            </div>
 	            <div class="span6">
-	                <s:textfield name="role.roleName" key="role.name" cssClass="form-control"/>
+	                <s:textfield name="role.roleName" key="role.name" cssClass="form-control" required="true" maxLength="32" />
 	            </div>
 	        </div>
 	

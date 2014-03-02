@@ -78,10 +78,10 @@ public class RoleServiceImpl implements RoleService {
      *  @lastModified       
      *  @history
      */
-    public List<UserVO> listUserOfRole(String roleID){
-        return roleDao.listUserOfRole(roleID);        
+    public List<UserVO> listUserOfRole(String roleID) {
+        return roleDao.listUserOfRole(roleID);
     }
-    
+
     /**
      * 
      *  获取角色在该功能上的权限
@@ -93,10 +93,10 @@ public class RoleServiceImpl implements RoleService {
      *  @lastModified       
      *  @history
      */
-    public RoleFuncTreeVO getRoleFuncTree(String roleID, String funcTreeID){
-        return roleDao.getRoleFuncTree(roleID,funcTreeID);       
+    public RoleFuncTreeVO getRoleFuncTree(String roleID, String funcTreeID) {
+        return roleDao.getRoleFuncTree(roleID, funcTreeID);
     }
-    
+
     /**
      * 
      *  保存角色在该功能上的权限
@@ -106,9 +106,9 @@ public class RoleServiceImpl implements RoleService {
      *  @lastModified       
      *  @history
      */
-    public RoleFuncTreeVO saveRoleFuncTree(RoleFuncTreeVO roleFuncTreeVO){
-        return roleDao.saveRoleFuncTree(roleFuncTreeVO);  
-        
+    public RoleFuncTreeVO saveRoleFuncTree(RoleFuncTreeVO roleFuncTreeVO) {
+        return roleDao.saveRoleFuncTree(roleFuncTreeVO);
+
     }
 
 }

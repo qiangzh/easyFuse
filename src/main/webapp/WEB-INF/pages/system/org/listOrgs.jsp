@@ -32,7 +32,7 @@
 		
 		function treeNodeSelected1(node) {
 			dojo.io.bind({
-				url : "<s:url value='/org/listSubOrgs'/>",
+				url : "<s:url value='/org/viewOrg'/>",
 				content : {'treeNode.id' : node.node.widgetId},
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
@@ -45,7 +45,7 @@
 		//点击树的节点时候触发的事件
 		dojo.event.topic.subscribe("treeSelected", function treeNodeSelected(node) {
 			dojo.io.bind({
-				url : "<s:url value='/org/listSubOrgs'/>",
+				url : "<s:url value='/org/viewOrg'/>",
 				content : {'treeNode.id' : node.node.widgetId},
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
@@ -69,7 +69,7 @@
 		function addTreeNode(treeNodeID) {
 			dojo.io.bind({
 				url : "<s:url value='/org/addOrg'/>",
-				content : {'treeNode.id' : treeNodeID},
+				content : {'org.parentID' : treeNodeID},
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
 				},
@@ -79,10 +79,10 @@
 		}
 	
 		// mainFrame 编辑跳转操作
-		function editTreeNode(treeNodeID, childNodeID) {
+		function editTreeNode(treeNodeID) {
 			dojo.io.bind({
 				url : "<s:url value='/org/editOrg'/>",
-				content : {'treeNode.id' : treeNodeID,'id' : childNodeID},
+				content : {'org.id' : treeNodeID},
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
 				},
@@ -91,8 +91,8 @@
 			});
 		}		
 		// mainFrame 删除跳转操作
-		function deleteTreeNode(treeNodeID, childNodeID) {
-			var url = '<s:url value='/org/deleteOrg'/>'+'?treeNode.id='+treeNodeID+'&org.id='+childNodeID;
+		function deleteTreeNode(treeNodeID) {
+			var url = '<s:url value='/org/deleteOrg'/>'+'?org.id='+treeNodeID;
 			document.orgForm.action =url;
 			document.orgForm.submit();
 		}
@@ -105,7 +105,7 @@
 			<div class="span2" id="leftFrame">
 				<sx:tree id="orgTree" rootNode="treeRootNode"
 					childCollectionProperty="children" nodeIdProperty="id"
-					nodeTitleProperty="name" value="id" treeSelectedTopic="treeSelected"
+					nodeTitleProperty="name" value="id" selectedNotifyTopics="treeSelected"
 					expandedNotifyTopics="treeExpanded">
 				</sx:tree>
 			</div>

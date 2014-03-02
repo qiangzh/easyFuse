@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import com.maodr.framework.exception.BusinessException;
+import com.maodr.framework.tree.TreeNode;
 import com.maodr.system.model.OrgPO;
 import com.maodr.system.org.dao.OrgDao;
 import com.maodr.system.org.vo.OrgVO;
@@ -93,6 +95,28 @@ public class OrgServiceImpl implements OrgService {
     */
     public void deleteOrg(String id) {
         orgDao.remove(id);
+    }
+
+    /**
+     *  获取组织机构树根节点
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月2日 上午5:50:07
+     *  @lastModified      
+     *  @history
+     */
+    public TreeNode saveOrGetRootOrg() {
+        OrgVO orgVO = orgDao.getRootOrg();
+        if (orgVO == null) {
+            orgVO = new OrgVO();
+            orgVO.setCode("0");
+            orgVO.setName("组织机构");
+            orgVO.setParentID("-1");
+            String id = this.saveOrg(orgVO);
+            orgVO.setId(id);
+        }
+        TreeNode treeNode = new TreeNode(orgVO.getId(), orgVO.getCode(), orgVO.getName());
+        return treeNode;
     }
 
 }

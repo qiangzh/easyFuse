@@ -3,24 +3,46 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<!-- Constants -->
-    <constant name="struts.devMode" value="false"/>
-    <constant name="struts.i18n.encoding" value="UTF-8"/>
-    <constant name="struts.action.extension" value="action,"/>
-    <constant name="struts.objectFactory" value="spring"/>
-    <constant name="struts.custom.i18n.resources" value="i18n/common/common"/>
-    <constant name="struts.multipart.maxSize" value="2097152"/>
-    <constant name="struts.ui.theme" value="css_xhtml"/>
-    <constant name="struts.codebehind.pathPrefix" value="/WEB-INF/pages/"/>
-    <constant name="struts.enable.SlashesInActionNames" value="true"/>
-    <constant name="struts.convention.action.disableScanning" value="true"/>
-    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
-    <!-- Allow <s:submit> to call method names directly -->
-    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.action.extension" value="action," />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.custom.i18n.resources" value="i18n/common/common" />
+	<constant name="struts.multipart.maxSize" value="2097152" />
+	<constant name="struts.ui.theme" value="css_xhtml" />
+	<constant name="struts.codebehind.pathPrefix" value="/WEB-INF/pages/" />
+	<constant name="struts.enable.SlashesInActionNames" value="true" />
+	<constant name="struts.convention.action.disableScanning" value="true" />
+	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
+	<!-- Allow <s:submit> to call method names directly -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 
-	<package name="default" namespace="/" extends="struts-default">		
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- 定义一个拦截器stack -->
+		<interceptors>
+			<interceptor name="exception" class="com.maodr.framework.interceptor.ExceptionInterceptor"></interceptor>
+			<interceptor-stack name="mydefault">
+				<!-- 覆盖defultStack中的exception设置，启用它的日志功能 -->
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="exception"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 修改默认的拦截器stack，原来是defaultStack -->
+		<default-interceptor-ref name="mydefault" />
+		
+		<!--全局跳转 -->
+		<global-results>
+			<result name="exception">/WEB-INF/pages/error/error.jsp</result>
+		</global-results>
+
+		<!-- 定义要捕获的异常 -->
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception" />
+		</global-exception-mappings>
 	</package>
-	
+
 	<include file="config/common/struts-common.xml"></include>
 	<include file="config/system/*/struts-system-*.xml"></include>
-	
+
 </struts>

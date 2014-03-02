@@ -244,8 +244,9 @@ public class RoleAction extends BaseAction {
             roleFuncTreeVO.setRoleID(roleID);
             roleFuncTreeVO.setFuncTreeID(funcTreeID);
             roleFuncTreeVO.setHasPermission("0");
-        }else{
-            roleFuncTreeVO.setHasPermission("1");            
+        }
+        else {
+            roleFuncTreeVO.setHasPermission("1");
         }
         return "setRolePermission";
     }
@@ -274,7 +275,7 @@ public class RoleAction extends BaseAction {
      *  @history
      */
     public TreeNode getTreeRootNode() {
-        TreeNode treeNode = new TreeNode("0", "功能树");
+        TreeNode treeNode = new TreeNode("0", "0", "功能树");
         List<TreeNode> childrenList = this.getChildrenNode(treeNode.getId());
         treeNode.setChildren(childrenList);
         return treeNode;
@@ -294,7 +295,7 @@ public class RoleAction extends BaseAction {
         List<TreeNode> childrenList = new ArrayList<TreeNode>();
         List<FuncTreeVO> subFuncTreeList = funcTreeService.listSubFuncTrees(nodeID);
         for (FuncTreeVO funcTreeVO : subFuncTreeList) {
-            TreeNode subTreeNode = new TreeNode(funcTreeVO.getId(), funcTreeVO.getName());
+            TreeNode subTreeNode = new TreeNode(funcTreeVO.getId(), funcTreeVO.getCode(), funcTreeVO.getName());
             childrenList.add(subTreeNode);
             List<TreeNode> subTreeChildrenList = this.getChildrenNode(subTreeNode.getId());
             subTreeNode.setChildren(subTreeChildrenList);

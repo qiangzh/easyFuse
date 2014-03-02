@@ -72,7 +72,25 @@ public class OrgDaoImpl extends BaseDaoImpl<OrgPO, String> implements OrgDao {
             voList.add(orgVO);
         }
         return voList;
+    }
 
+    /**
+     * 
+     *  根据Code获取节点
+     *  @return
+     *  @author Administrator
+     *  @created 2014年1月7日 上午6:53:22
+     *  @lastModified       
+     *  @history
+     */
+    public OrgVO getRootOrg() {
+        OrgVO orgVO = null;
+        List list = getSession().createCriteria(OrgPO.class).add(Restrictions.eq("parentID", "-1")).list();
+        if (list != null && !list.isEmpty()) {
+            orgVO = new OrgVO();
+            BeanUtils.copyProperties(list.get(0), orgVO);
+        }
+        return orgVO;
     }
 
 }

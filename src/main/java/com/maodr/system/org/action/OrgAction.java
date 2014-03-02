@@ -3,7 +3,7 @@ package com.maodr.system.org.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.util.StringUtils;
 
 import com.maodr.framework.base.action.BaseAction;
 import com.maodr.framework.tree.TreeNode;
@@ -64,8 +64,16 @@ public class OrgAction extends BaseAction {
      *  @history
      */
     public String saveOrg() {
-        org.setParentID(treeNode.getId());
+        // 保存组织机构信息
         orgService.saveOrg(org);
+
+        // 设置选中节点
+        String selectNodeID = org.getParentID();
+        if (org.getId() != null && !"".equals(org.getId())) {
+            selectNodeID = org.getId();
+        }
+        OrgVO selectOrgVO = orgService.getOrg(selectNodeID);
+        treeNode = new TreeNode(selectOrgVO.getId(), selectOrgVO.getCode(), selectOrgVO.getName());
         return "reflushListOrgs";
     }
 
@@ -79,8 +87,15 @@ public class OrgAction extends BaseAction {
      *  @history
      */
     public String deleteOrg() {
-        org.setParentID(treeNode.getId());
+        OrgVO deleteOrgVO = orgService.getOrg(org.getId());
+
+        // 删除组织结构
         orgService.deleteOrg(org.getId());
+
+        // 设置删除后选中节点
+        OrgVO selectOrgVO = orgService.getOrg(deleteOrgVO.getParentID());
+        treeNode = new TreeNode(selectOrgVO.getId(), selectOrgVO.getCode(), selectOrgVO.getName());
+
         return "reflushListOrgs";
     }
 
@@ -94,9 +109,8 @@ public class OrgAction extends BaseAction {
      */
     public String listOrgs() {
         if (treeNode == null) {
-            treeNode = new TreeNode("0", "组织机构");
+            treeNode = orgService.saveOrGetRootOrg();
         }
-        orgs = orgService.listOrgs();
         return "listOrgs";
     }
 
@@ -121,15 +135,26 @@ public class OrgAction extends BaseAction {
      *  @history
      */
     public String editOrg() {
-        HttpServletRequest request = getRequest();
-        String id = request.getParameter("id");
-        org = orgService.getOrg(id);
+        org = orgService.getOrg(org.getId());
         return "addOrg";
     }
 
     /**
      * 
-     *  获取组织机构树
+     *  查看组织机构信息
+     *  @author Administrator
+     *  @created 2014年1月1日 下午3:39:43
+     *  @lastModified       
+     *  @history
+     */
+    public String viewOrg() {
+        org = orgService.getOrg(treeNode.getId());
+        return "viewOrg";
+    }
+
+    /**
+     * 
+     *  获取组织机构
      *  @return
      *  @author Administrator
      *  @created 2014年1月6日 上午7:54:12
@@ -137,17 +162,27 @@ public class OrgAction extends BaseAction {
      *  @history
      */
     public TreeNode getTreeRootNode() {
-        TreeNode treeNode = new TreeNode("0", "组织机构");
+        TreeNode treeNode = orgService.saveOrGetRootOrg();
         List<TreeNode> childrenList = this.getChildrenNode(treeNode.getId());
         treeNode.setChildren(childrenList);
         return treeNode;
     }
 
+    /**
+     * 
+     *  递归获取子节点
+     *  @param nodeID
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月2日 上午9:56:53
+     *  @lastModified       
+     *  @history
+     */
     public List<TreeNode> getChildrenNode(String nodeID) {
         List<TreeNode> childrenList = new ArrayList<TreeNode>();
         List<OrgVO> subOrgList = orgService.listSubOrgs(nodeID);
         for (OrgVO orgVO : subOrgList) {
-            TreeNode subTreeNode = new TreeNode(orgVO.getId(), orgVO.getName());
+            TreeNode subTreeNode = new TreeNode(orgVO.getId(), orgVO.getCode(), orgVO.getName());
             childrenList.add(subTreeNode);
             List<TreeNode> subTreeChildrenList = this.getChildrenNode(subTreeNode.getId());
             subTreeNode.setChildren(subTreeChildrenList);
@@ -157,7 +192,7 @@ public class OrgAction extends BaseAction {
 
     /**
      * 
-     *  获取节点列表
+     *  获取子节点列表
      *  @return
      *  @author Administrator
      *  @created 2014年1月6日 上午7:54:33
@@ -168,10 +203,10 @@ public class OrgAction extends BaseAction {
     public String listSubOrgs() {
         if (!"0".equals(treeNode.getId())) {
             OrgVO orgVO = orgService.getOrg(treeNode.getId());
-            treeNode = new TreeNode(orgVO.getId(), orgVO.getName());
+            treeNode = new TreeNode(orgVO.getId(), orgVO.getCode(), orgVO.getName());
         }
         else {
-            treeNode = new TreeNode("0", "组织机构");
+            treeNode = orgService.saveOrGetRootOrg();
         }
         orgs = orgService.listSubOrgs(treeNode.getId());
         return "listSubOrgs";

@@ -2,6 +2,7 @@ package com.maodr.system.org.service;
 
 import java.util.List;
 
+import com.maodr.framework.tree.TreeNode;
 import com.maodr.system.org.vo.OrgVO;
 
 /**
@@ -70,5 +71,16 @@ public interface OrgService {
      *  @history
      */
     public void deleteOrg(String id);
+
+    /**
+     * 
+     *  获取组织机构树根节点
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月2日 上午5:49:36
+     *  @lastModified       
+     *  @history
+     */
+    public TreeNode saveOrGetRootOrg();
 
 }
