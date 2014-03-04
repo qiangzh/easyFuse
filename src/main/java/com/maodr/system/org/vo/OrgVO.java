@@ -21,6 +21,8 @@ public class OrgVO implements Serializable {
 
     private String parentID;
 
+    private String status = "1"; // 0无效|1有效
+
     public String getId() {
         return id;
     }
@@ -51,6 +53,14 @@ public class OrgVO implements Serializable {
 
     public void setParentID(String parentID) {
         this.parentID = parentID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

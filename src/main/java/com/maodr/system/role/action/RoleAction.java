@@ -153,10 +153,22 @@ public class RoleAction extends BaseAction {
      *  @history
      */
     public String editRole() {
-        HttpServletRequest request = getRequest();
-        String id = request.getParameter("id");
-        role = roleService.getRole(id);
+        role = roleService.getRole(role.getId());
         return "addRole";
+    }
+    
+    /**
+     * 
+     *  删除角色
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月5日 上午6:42:04
+     *  @lastModified       
+     *  @history
+     */
+    public String deleteRole() {
+        roleService.deleteRole(role.getId());
+        return "reflushListRoles";
     }
 
     /**
@@ -197,9 +209,7 @@ public class RoleAction extends BaseAction {
      *  @history
      */
     public String listUserOfRole() {
-        HttpServletRequest request = getRequest();
-        String roleID = request.getParameter("id");
-        users = roleService.listUserOfRole(roleID);
+        users = roleService.listUserOfRole(role.getId());
         return "listUserOfRole";
 
     }

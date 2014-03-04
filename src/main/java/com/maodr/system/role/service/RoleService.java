@@ -86,4 +86,15 @@ public interface RoleService {
      */
     public RoleFuncTreeVO saveRoleFuncTree(RoleFuncTreeVO roleFuncTreeVO);
 
+    /**
+     * 
+     *  删除角色
+     *  @param id
+     *  @author Administrator
+     *  @created 2014年3月5日 上午6:42:59
+     *  @lastModified       
+     *  @history
+     */
+    public void deleteRole(String id);
+
 }

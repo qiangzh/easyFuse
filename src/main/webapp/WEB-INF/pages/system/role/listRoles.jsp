@@ -7,13 +7,19 @@
 	<script language="javaScript" type="text/javascript">	
 		// 查看已分配用户
 		function viewUser(roleID) {
-			var url = '<s:url value='/role/listUserOfRole'/>'+'?id='+roleID;
+			var url = '<s:url value='/role/listUserOfRole'/>'+'?role.id='+roleID;
 			document.roleForm.action =url;
 			document.roleForm.submit();
 		}
-		// 查看已分配用户
+		// 权限设置
 		function listRoleFuncTree(roleID) {
 			var url = '<s:url value='/role/listRoleFuncTree'/>'+'?roleFuncTreeVO.roleID='+roleID;
+			document.roleForm.action =url;
+			document.roleForm.submit();
+		}
+		// 删除角色
+		function deleteRole(roleID) {
+			var url = '<s:url value='/role/deleteRole'/>'+'?role.id='+roleID;
 			document.roleForm.action =url;
 			document.roleForm.submit();
 		}
@@ -34,13 +40,16 @@
 			<display:table id="role" name="roles" requestURI="" defaultsort="1" pagesize="25" 
 				class="table table-condensed table-striped table-hover table-bordered" size="resultSize" export="false">		
 		        <display:column title="序号">${role_rowNum}</display:column>   
-				<display:column property="roleCode" titleKey="role.code" sortable="true" escapeXml="true" url="/role/editRole?from=list" paramId="id" paramProperty="id" />
+				<display:column property="roleCode" titleKey="role.code" sortable="true" escapeXml="true" url="/role/editRole?from=list" paramId="role.id" paramProperty="id" />
 				<display:column property="roleName" titleKey="role.name" sortable="true" autolink="true" media="html" />		
 				<display:column title="" media="html">
 					<a onclick="viewUser('${role.id}');">查看已分配用户</a>
-		        </display:column>			
+		        </display:column>		        		
 				<display:column title="">
 					<a onclick="listRoleFuncTree('${role.id}');">权限设置</a>
+		        </display:column>
+		        <display:column title="" media="html">
+		        	<a onclick="deleteRole('${role.id}');">删除</a>
 		        </display:column>		
 				<display:setProperty name="paging.banner.item_name">&nbsp;</display:setProperty>
 				<display:setProperty name="paging.banner.items_name">&nbsp;</display:setProperty>		

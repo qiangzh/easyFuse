@@ -10,6 +10,7 @@
 	    <s:form name="userForm" action="/org/saveOrg" method="post" validate="true" autocomplete="off" cssClass="well form-horizontal">
 	    	<s:hidden key="org.id"/>	
 	    	<s:hidden key="org.parentID"/>
+	    	<s:hidden key="org.status"/>
 	    	
 	        <div class="row">
 	            <div class="span6">

@@ -6,14 +6,20 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.BeanUtils;
 
 import com.maodr.framework.base.dao.BaseDaoImpl;
+import com.maodr.framework.util.StringUtil;
+import com.maodr.system.model.OrgPO;
 import com.maodr.system.model.RoleFuncTreePO;
 import com.maodr.system.model.RolePO;
 import com.maodr.system.model.UserPO;
+import com.maodr.system.model.UserRolePO;
+import com.maodr.system.org.vo.OrgVO;
 import com.maodr.system.role.vo.RoleFuncTreeVO;
 import com.maodr.system.role.vo.RoleVO;
 import com.maodr.system.user.vo.UserVO;
@@ -128,4 +134,74 @@ public class RoleDaoImpl extends BaseDaoImpl<RolePO, String> implements RoleDao 
         return roleFuncTreeVO;
     }
 
+    /**
+     * 
+     *  删除角色
+     *  @param id
+     *  @author Administrator
+     *  @created 2014年3月5日 上午6:44:31
+     *  @lastModified       
+     *  @history
+     */
+    public void deleteRole(String id) {
+        this.remove(id);
+    }
+
+    /**
+     * 
+     *  校验角色下是否存在用户
+     *  @param roleVO
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月5日 上午6:47:36
+     *  @lastModified       
+     *  @history
+     */
+    public boolean checkRoleHasUser(RoleVO roleVO) {
+        Session session = getSession();
+        Criteria criteria = session.createCriteria(UserRolePO.class);
+        criteria.add(Restrictions.eq("roleID", roleVO.getId()));
+        Long total = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+        return total > 0 ? true : false;
+    }
+
+    /**
+     * 
+     *  校验角色编码重复
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月5日 上午4:44:22
+     *  @lastModified       
+     *  @history
+     */
+    public boolean checkRoleCodeExist(RoleVO roleVO) {
+        Session sess = getSession();
+        Criteria criteria = sess.createCriteria(RolePO.class);
+        if (!StringUtil.isEmpty(roleVO.getId())) {
+            criteria.add(Restrictions.ne("id", roleVO.getId()));
+        }
+        criteria.add(Restrictions.eq("roleCode", roleVO.getRoleCode()));
+        Long total = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+        return total > 0 ? true : false;
+    }
+
+    /**
+     * 
+     *  校验角色名称重复
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月5日 上午4:44:22
+     *  @lastModified       
+     *  @history
+     */
+    public boolean checkRoleNameExist(RoleVO roleVO) {
+        Session sess = getSession();
+        Criteria criteria = sess.createCriteria(RolePO.class);
+        if (!StringUtil.isEmpty(roleVO.getId())) {
+            criteria.add(Restrictions.ne("id", roleVO.getId()));
+        }
+        criteria.add(Restrictions.eq("roleName", roleVO.getRoleName()));
+        Long total = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+        return total > 0 ? true : false;
+    }
 }

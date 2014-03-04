@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import com.maodr.framework.exception.BusinessException;
 import com.maodr.system.model.RolePO;
 import com.maodr.system.role.dao.RoleDao;
 import com.maodr.system.role.vo.RoleFuncTreeVO;
@@ -27,7 +28,25 @@ public class RoleServiceImpl implements RoleService {
         this.roleDao = roleDao;
     }
 
+    /**
+     *  添加|修改角色
+     *  @param roleVO
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月5日 上午6:58:24
+     *  @lastModified      
+     *  @history
+     */
     public String saveRole(RoleVO roleVO) {
+        // 校验机构编码重复
+        if (roleDao.checkRoleCodeExist(roleVO)) {
+            throw new BusinessException("编码为{0}的角色已存在", new String[] { roleVO.getRoleCode() });
+        }
+
+        // 校验机构名称重复    
+        if (roleDao.checkRoleNameExist(roleVO)) {
+            throw new BusinessException("名称为{0}的角色已存在", new String[] { roleVO.getRoleCode() });
+        }
         return roleDao.saveOrUpdateRole(roleVO);
     }
 
@@ -42,7 +61,7 @@ public class RoleServiceImpl implements RoleService {
      */
     public List<RoleVO> listRoles() {
         List<RolePO> poList = roleDao.getAllDistinct();
-        List<RoleVO> voList = new ArrayList();
+        List<RoleVO> voList = new ArrayList<RoleVO>();
         RoleVO roleVO;
         for (RolePO rolePO : poList) {
             roleVO = new RoleVO();
@@ -108,7 +127,25 @@ public class RoleServiceImpl implements RoleService {
      */
     public RoleFuncTreeVO saveRoleFuncTree(RoleFuncTreeVO roleFuncTreeVO) {
         return roleDao.saveRoleFuncTree(roleFuncTreeVO);
+    }
 
+    /**
+     * 
+     *  删除角色
+     *  @param id
+     *  @author Administrator
+     *  @created 2014年3月5日 上午6:42:59
+     *  @lastModified       
+     *  @history
+     */
+    public void deleteRole(String id) {
+        RoleVO roleVO = this.getRole(id);
+        // 校验角色下是否存在用户
+        if (roleDao.checkRoleHasUser(roleVO)) {
+            throw new BusinessException("角色{0}下存在用户，不能删除", roleVO.getRoleName());
+        }
+
+        roleDao.deleteRole(id);
     }
 
 }

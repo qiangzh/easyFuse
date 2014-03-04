@@ -6,7 +6,6 @@
 </head>
 
 <body class="signup">
-
 	<div class="span2">
 	    <h2><fmt:message key="role.add.heading"/></h2>
 	    <fmt:message key="role.add.message"/>

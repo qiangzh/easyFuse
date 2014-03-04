@@ -30,8 +30,10 @@ public class OrgPO extends BaseObject implements Serializable {
     private String name; // required
 
     private String code; // required   
-    
+
     private String parentID; // required  
+
+    private String status; // required 
 
     public OrgPO() {
     }
@@ -52,19 +54,20 @@ public class OrgPO extends BaseObject implements Serializable {
     @Column(name = "C_CODE", nullable = false)
     public String getCode() {
         return code;
-    }  
+    }
 
     @Column(name = "C_PARENTID", nullable = false)
     public String getParentID() {
         return parentID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    @Column(name = "C_STATUS", nullable = false)
+    public String getStatus() {
+        return status;
     }
 
-    public void setParentID(String parentID) {
-        this.parentID = parentID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -73,6 +76,14 @@ public class OrgPO extends BaseObject implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setParentID(String parentID) {
+        this.parentID = parentID;
     }
 
     @Override

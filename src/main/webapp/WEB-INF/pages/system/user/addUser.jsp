@@ -18,6 +18,7 @@
 			    <s:form name="userForm" action="/user/saveUser" method="post" validate="true" autocomplete="off" cssClass="well form-horizontal">
 			    	<s:hidden key="user.id"/>	
 			    	<s:hidden key="user.enabled" value="true"/>
+			    	<s:hidden key="backUrl"/>
 			    	    
 			        <div class="row">
 			            <div class="span6">	

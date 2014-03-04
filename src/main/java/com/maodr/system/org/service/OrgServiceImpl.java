@@ -27,7 +27,26 @@ public class OrgServiceImpl implements OrgService {
         this.orgDao = orgDao;
     }
 
+    /**
+     *  添加|修改机构
+     *  @param orgVO
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月5日 上午4:31:09
+     *  @lastModified      
+     *  @history
+     */
     public String saveOrg(OrgVO orgVO) {
+        // 校验机构编码重复
+        if (orgDao.checkOrgCodeExist(orgVO)) {
+            throw new BusinessException("编码为{0}的机构已存在", new String[] { orgVO.getCode() });
+        }
+
+        // 校验机构名称重复    
+        if (orgDao.checkOrgNameExist(orgVO)) {
+            throw new BusinessException("名称为{0}的机构已存在", new String[] { orgVO.getCode() });
+        }
+
         return orgDao.saveOrUpdateOrg(orgVO);
     }
 
@@ -42,7 +61,7 @@ public class OrgServiceImpl implements OrgService {
      */
     public List<OrgVO> listOrgs() {
         List<OrgPO> poList = orgDao.getAllDistinct();
-        List<OrgVO> voList = new ArrayList();
+        List<OrgVO> voList = new ArrayList<OrgVO>();
         OrgVO orgVO;
         for (OrgPO orgPO : poList) {
             orgVO = new OrgVO();
@@ -94,7 +113,18 @@ public class OrgServiceImpl implements OrgService {
     *  @history
     */
     public void deleteOrg(String id) {
-        orgDao.remove(id);
+        OrgVO orgVO = this.getOrg(id);
+        // 校验机构下是否存在机构
+        if (orgDao.checkOrgHasChild(orgVO)) {
+            throw new BusinessException("机构{0}下存在其他机构,不能删除", new String[] { orgVO.getCode() });
+        }
+
+        // 校验机构下是否有人员
+        if (orgDao.checkOrgHasEmp(orgVO)) {
+            throw new BusinessException("机构{0}下存在人员,不能删除", new String[] { orgVO.getCode() });
+        }
+
+        orgDao.deleteOrg(id);
     }
 
     /**
@@ -112,6 +142,7 @@ public class OrgServiceImpl implements OrgService {
             orgVO.setCode("0");
             orgVO.setName("组织机构");
             orgVO.setParentID("-1");
+            orgVO.setStatus("1"); // 有效
             String id = this.saveOrg(orgVO);
             orgVO.setId(id);
         }

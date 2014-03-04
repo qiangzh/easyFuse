@@ -22,43 +22,26 @@ import com.opensymphony.xwork2.ActionSupport;
 public class BaseAction extends ActionSupport {
     private static final long serialVersionUID = 3525445612504421307L;
 
-    /**
-     * Transient log to prevent session synchronization issues - children can use instance for logging.
-     */
     protected final transient Logger log = LoggerFactory.getLogger(getClass());
 
-    /**
-     * Constant for cancel result String
-     */
     public static final String CANCEL = "cancel";
 
-    /**
-     * Indicator if the user clicked cancel
-     */
     protected String cancel;
 
-    /**
-     * Indicator for the page the user came from.
-     */
     protected String from;
 
-    /**
-     * Set to "delete" when a "delete" request parameter is passed in
-     */
     protected String delete;
 
-    /**
-     * Set to "save" when a "save" request parameter is passed in
-     */
     protected String save;
+    
+    protected String backUrl; // 异常返回地址
 
-    /**
-     * Simple method that returns "cancel" result
-     *
-     * @return "cancel"
-     */
-    public String cancel() {
-        return CANCEL;
+    public String getBackUrl() {
+        return backUrl;
+    }
+
+    public void setBackUrl(String backUrl) {
+        this.backUrl = backUrl;
     }
 
     /**
