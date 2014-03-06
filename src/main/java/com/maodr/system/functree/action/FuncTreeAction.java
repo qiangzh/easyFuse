@@ -154,9 +154,12 @@ public class FuncTreeAction extends BaseAction {
         if (!"0".equals(treeNode.getId())) {
             FuncTreeVO funcTreeVO = funcTreeService.getFuncTree(treeNode.getId());
             treeNode = new TreeNode(funcTreeVO.getId(), funcTreeVO.getCode(), funcTreeVO.getName());
+            funcTree = funcTreeService.getFuncTree(treeNode.getId());
         }
         else {
             treeNode = new TreeNode("0", "0", "功能树");
+            funcTree = new FuncTreeVO();
+            funcTree.setId("-1");            
         }
         funcTrees = funcTreeService.listSubFuncTrees(treeNode.getId());
         return "listSubFuncTrees";

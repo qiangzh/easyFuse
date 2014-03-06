@@ -10,6 +10,7 @@
 	    <s:form name="userForm" action="/functree/saveFuncTree" method="post" validate="true" autocomplete="off" cssClass="well form-horizontal">
 	    	<s:hidden key="funcTree.id"/>	
 	    	<s:hidden key="treeNode.id"/>
+	    	<s:hidden key="funcTree.sort"/>
 	    	
 	        <div class="row">
 	            <div class="span6">

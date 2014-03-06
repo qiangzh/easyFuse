@@ -104,7 +104,7 @@
 					expandedNotifyTopics="treeExpanded">
 				</sx:tree>
 			</div>
-			<div class="span7" id="mainFrame"></div>
+			<div class="span10" id="mainFrame"></div>
 		</div>
 	</div>
 </body>

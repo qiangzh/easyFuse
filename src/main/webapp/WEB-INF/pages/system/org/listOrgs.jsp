@@ -109,8 +109,7 @@
 					expandedNotifyTopics="treeExpanded">
 				</sx:tree>
 			</div>
-			<div class="span8" id="mainFrame"></div>
-			<s:form name="orgForm" action="/org/deleteOrg" method="post"></s:form>
+			<div class="span10" id="mainFrame"></div>
 		</div>
 	</div>
 </body>

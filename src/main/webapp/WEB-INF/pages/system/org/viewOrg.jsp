@@ -12,7 +12,7 @@
 	    		    	
 	        <div class="row">
 	            <div class="span6">
-	        		<s:textfield key="org.code"  disabled="true" cssClass="form-control"/>
+	        		<s:textfield key="org.code" disabled="true" cssClass="form-control"/>
 	            </div>
 	            <div class="span6">
 	        		<s:textfield key="org.name" disabled="true" cssClass="form-control"/>

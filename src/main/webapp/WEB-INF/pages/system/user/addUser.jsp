@@ -14,7 +14,7 @@
 			    <fmt:message key="signup.message"/>
 			</div>
 			
-			<div class="span8">
+			<div class="span10">
 			    <s:form name="userForm" action="/user/saveUser" method="post" validate="true" autocomplete="off" cssClass="well form-horizontal">
 			    	<s:hidden key="user.id"/>	
 			    	<s:hidden key="user.enabled" value="true"/>
