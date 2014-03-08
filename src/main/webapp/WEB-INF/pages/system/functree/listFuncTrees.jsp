@@ -90,6 +90,13 @@
 			    preventCache:true
 			});
 		}
+		
+		// mainFrame 删除跳转操作
+		function deleteTreeNode(treeNodeID, childNodeID) {
+			var url = '<s:url value='/functree/deleteFuncTree'/>'+'?id='+childNodeID;
+			document.funcTreeForm.action =url;
+			document.funcTreeForm.submit();
+		}
 	</script>
 </head>
 <body>
@@ -105,6 +112,7 @@
 				</sx:tree>
 			</div>
 			<div class="span10" id="mainFrame"></div>
+			<s:form name="funcTreeForm" action="/functree/deleteFuncTree" method="post"></s:form>
 		</div>
 	</div>
 </body>

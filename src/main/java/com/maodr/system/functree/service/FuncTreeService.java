@@ -59,5 +59,16 @@ public interface FuncTreeService {
      *  @history
      */
     public List<FuncTreeVO> listSubFuncTrees(String treeNodeID);
+    
+    /**
+     * 
+     *  删除功能树
+     *  @param id
+     *  @author Administrator
+     *  @created 2014年3月8日 下午1:05:57
+     *  @lastModified       
+     *  @history
+     */
+    public void deleteFuncTree(String id);
 
 }

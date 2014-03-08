@@ -5,6 +5,7 @@ import java.util.List;
 import com.maodr.framework.base.dao.BaseDao;
 import com.maodr.system.functree.vo.FuncTreeVO;
 import com.maodr.system.model.FuncTreePO;
+import com.maodr.system.org.vo.OrgVO;
 
 /**
  * 
@@ -39,5 +40,39 @@ public interface FuncTreeDao extends BaseDao<FuncTreePO, String> {
      *  @history
      */
     public List<FuncTreeVO> listSubFuncTrees(String treeNodeID);
+
+    /**
+     * 
+     *  校验功能编码重复
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月5日 上午4:44:11
+     *  @lastModified       
+     *  @history
+     */
+    public boolean checkFuncTreeCodeExist(FuncTreeVO funcTreeVO);
+
+    /**
+     * 
+     *  校验功能名称重复
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月5日 上午4:44:22
+     *  @lastModified       
+     *  @history
+     */
+    public boolean checkFuncTreeNameExist(FuncTreeVO funcTreeVO);
+
+    /**
+     * 
+     *  生成Sort字段
+     *  @param funcTreeVO
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月8日 下午12:40:42
+     *  @lastModified       
+     *  @history
+     */
+    public String generateFuncTreeSort(FuncTreeVO funcTreeVO);
 
 }

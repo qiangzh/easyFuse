@@ -139,7 +139,6 @@ public class OrgDaoImpl extends BaseDaoImpl<OrgPO, String> implements OrgDao {
         criteria.add(Restrictions.eq("status", "1")); // 有效     
         Long total = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
         return total > 0 ? true : false;
-
     }
 
     /**

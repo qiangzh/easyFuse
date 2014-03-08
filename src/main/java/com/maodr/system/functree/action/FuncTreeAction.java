@@ -111,6 +111,22 @@ public class FuncTreeAction extends BaseAction {
         funcTree = funcTreeService.getFuncTree(id);
         return "addFuncTree";
     }
+    
+
+    /**
+     * 
+     *  删除功能树信息
+     *  @author Administrator
+     *  @created 2014年1月1日 下午3:39:43
+     *  @lastModified       
+     *  @history
+     */
+    public String deleteFuncTree() {
+        HttpServletRequest request = getRequest();
+        String id = request.getParameter("id");
+        funcTreeService.deleteFuncTree(id);
+        return "reflushListFuncTrees";
+    }
 
     /**
      * 

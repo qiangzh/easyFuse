@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import com.maodr.framework.exception.BusinessException;
+import com.maodr.framework.util.StringUtil;
 import com.maodr.system.functree.dao.FuncTreeDao;
 import com.maodr.system.functree.vo.FuncTreeVO;
 import com.maodr.system.model.FuncTreePO;
@@ -26,6 +28,21 @@ public class FuncTreeServiceImpl implements FuncTreeService {
     }
 
     public String saveFuncTree(FuncTreeVO funcTreeVO) {
+        // 校验功能树编码重复
+        if (funcTreeDao.checkFuncTreeCodeExist(funcTreeVO)) {
+            throw new BusinessException("编码为{0}的功能已存在", new String[] { funcTreeVO.getCode() });
+        }
+
+        // 校验功能树名称重复    
+        if (funcTreeDao.checkFuncTreeNameExist(funcTreeVO)) {
+            throw new BusinessException("名称为{0}的功能已存在", new String[] { funcTreeVO.getCode() });
+        }
+
+        // 生成sort
+        if (StringUtil.isEmpty(funcTreeVO.getId())) {
+            funcTreeVO.setSort(funcTreeDao.generateFuncTreeSort(funcTreeVO));
+
+        }
         return funcTreeDao.saveOrUpdateFuncTree(funcTreeVO);
     }
 
@@ -79,7 +96,19 @@ public class FuncTreeServiceImpl implements FuncTreeService {
     */
     public List<FuncTreeVO> listSubFuncTrees(String treeNodeID) {
         return funcTreeDao.listSubFuncTrees(treeNodeID);
+    }
 
+    /**
+     * 
+     *  删除功能树
+     *  @param id
+     *  @author Administrator
+     *  @created 2014年3月8日 下午1:05:57
+     *  @lastModified       
+     *  @history
+     */
+    public void deleteFuncTree(String id) {
+        funcTreeDao.remove(id);
     }
 
 }

@@ -7,10 +7,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.BeanUtils;
 
 import com.maodr.framework.base.dao.BaseDaoImpl;
+import com.maodr.framework.util.StringUtil;
 import com.maodr.system.functree.vo.FuncTreeVO;
 import com.maodr.system.model.FuncTreePO;
 
@@ -64,7 +66,6 @@ public class FuncTreeDaoImpl extends BaseDaoImpl<FuncTreePO, String> implements 
         Criteria crit = sess.createCriteria(FuncTreePO.class);
         crit.add(Restrictions.eq("parentID", treeNodeID));
         crit.addOrder(Order.asc("sort"));
-        crit.setMaxResults(10);
         List<FuncTreePO> poList = crit.list();
         List<FuncTreeVO> voList = new ArrayList();
         FuncTreeVO funcTreeVO;
@@ -74,7 +75,93 @@ public class FuncTreeDaoImpl extends BaseDaoImpl<FuncTreePO, String> implements 
             voList.add(funcTreeVO);
         }
         return voList;
+    }
 
+    /**
+     * 
+     *  校验功能编码重复
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月5日 上午4:44:11
+     *  @lastModified       
+     *  @history
+     */
+    public boolean checkFuncTreeCodeExist(FuncTreeVO funcTreeVO) {
+        Session sess = getSession();
+        Criteria criteria = sess.createCriteria(FuncTreePO.class);
+        if (!StringUtil.isEmpty(funcTreeVO.getId())) {
+            criteria.add(Restrictions.ne("id", funcTreeVO.getId()));
+        }
+        criteria.add(Restrictions.eq("code", funcTreeVO.getCode()));
+        Long total = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+        return total > 0 ? true : false;
+
+    }
+
+    /**
+     * 
+     *  校验功能名称重复
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月5日 上午4:44:22
+     *  @lastModified       
+     *  @history
+     */
+    public boolean checkFuncTreeNameExist(FuncTreeVO funcTreeVO) {
+        Session sess = getSession();
+        Criteria criteria = sess.createCriteria(FuncTreePO.class);
+        if (!StringUtil.isEmpty(funcTreeVO.getId())) {
+            criteria.add(Restrictions.ne("id", funcTreeVO.getId()));
+        }
+        criteria.add(Restrictions.eq("name", funcTreeVO.getName()));
+        Long total = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+        return total > 0 ? true : false;
+    }
+
+    /**
+     * 
+     *  生成Sort字段
+     *  @param funcTreeVO
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月8日 下午12:40:42
+     *  @lastModified       
+     *  @history
+     */
+    public String generateFuncTreeSort(FuncTreeVO funcTreeVO) {
+        String sort = "01-";
+        Session sess = getSession();
+        Criteria criteria = sess.createCriteria(FuncTreePO.class);
+        criteria.add(Restrictions.eq("parentID", funcTreeVO.getParentID()));
+        criteria.addOrder(Order.desc("sort"));
+        criteria.setMaxResults(1);
+        List<FuncTreePO> poList = criteria.list();
+        if (poList != null && !poList.isEmpty()) {
+            FuncTreePO funcTreePO = poList.get(0);
+            sort = funcTreePO.getSort();
+            String[] sortPath = sort.split("-");
+            String tempSort = "";
+            if (sortPath.length > 0) {
+                for (int i = 0; i < sortPath.length - 1; i++) {
+                    tempSort = tempSort + sortPath[i] + "-";
+                }
+                int maxNum = Integer.valueOf(sortPath[sortPath.length - 1]) + 1;
+                if (maxNum > 9) {
+                    tempSort = tempSort + maxNum + "-";
+                }
+                else {
+                    tempSort = tempSort + "0" + maxNum + "-";
+                }
+                sort = tempSort;
+            }
+        }
+        else {
+            FuncTreePO parentFuncTreePO = this.get(funcTreeVO.getParentID());
+            if (parentFuncTreePO != null) {
+                sort = parentFuncTreePO.getSort() + "01-";
+            }
+        }
+        return sort;
     }
 
 }
