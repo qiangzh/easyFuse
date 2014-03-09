@@ -116,12 +116,12 @@ public class OrgServiceImpl implements OrgService {
         OrgVO orgVO = this.getOrg(id);
         // 校验机构下是否存在机构
         if (orgDao.checkOrgHasChild(orgVO)) {
-            throw new BusinessException("机构{0}下存在其他机构,不能删除", new String[] { orgVO.getCode() });
+            throw new BusinessException("机构{0}下存在其他机构,不能删除", new String[] { orgVO.getName() });
         }
 
         // 校验机构下是否有人员
         if (orgDao.checkOrgHasEmp(orgVO)) {
-            throw new BusinessException("机构{0}下存在人员,不能删除", new String[] { orgVO.getCode() });
+            throw new BusinessException("机构{0}下存在人员,不能删除", new String[] { orgVO.getName() });
         }
 
         orgDao.deleteOrg(id);

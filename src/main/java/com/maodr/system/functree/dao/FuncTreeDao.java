@@ -5,7 +5,6 @@ import java.util.List;
 import com.maodr.framework.base.dao.BaseDao;
 import com.maodr.system.functree.vo.FuncTreeVO;
 import com.maodr.system.model.FuncTreePO;
-import com.maodr.system.org.vo.OrgVO;
 
 /**
  * 
@@ -74,5 +73,28 @@ public interface FuncTreeDao extends BaseDao<FuncTreePO, String> {
      *  @history
      */
     public String generateFuncTreeSort(FuncTreeVO funcTreeVO);
+
+    /**
+     * 
+     *  校验功能下是否存在功能(是否为叶子节点)
+     *  @param funcTreeVO
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月10日 上午6:13:03
+     *  @lastModified       
+     *  @history
+     */
+    public boolean checkFuncTreeHasChild(FuncTreeVO funcTreeVO);
+
+    /**
+     * 
+     *  删除角色功能树关联关系
+     *  @param funcTreeID
+     *  @author Administrator
+     *  @created 2014年3月10日 上午6:26:36
+     *  @lastModified       
+     *  @history
+     */
+    public void deleteRoleFuncTree(String funcTreeID);
 
 }

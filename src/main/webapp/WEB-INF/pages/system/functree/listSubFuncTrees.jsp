@@ -16,10 +16,11 @@
 		            <div class="span5">
 		        		<s:textfield key="funcTree.name" disabled="true" cssClass="form-control"/>
 		            </div>
-		            <div class="span2 btn-group">
-			            <a class="btn btn-mini btn-primary" onclick="editTreeNode('${funcTree.parentID}','${funcTree.id}');">修改</a>
-			       </div>
 		        </div>	
+        		<div id="actions" class="form-group form-actions">
+		            <a class="btn btn-mini btn-primary" onclick="editTreeNode('${funcTree.parentID}','${funcTree.id}');">修改</a>
+		            <a class="btn btn-mini btn-primary" onclick="deleteTreeNode('${funcTree.parentID}','${funcTree.id}');">删除</a>
+		        </div>
 		    </s:form>
 		</div>
 	</div>

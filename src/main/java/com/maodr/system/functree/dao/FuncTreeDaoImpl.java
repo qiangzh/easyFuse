@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -120,7 +121,7 @@ public class FuncTreeDaoImpl extends BaseDaoImpl<FuncTreePO, String> implements 
 
     /**
      * 
-     *  生成Sort字段
+     *  生成Sort字段用"-"分隔16进制
      *  @param funcTreeVO
      *  @return
      *  @author Administrator
@@ -129,7 +130,8 @@ public class FuncTreeDaoImpl extends BaseDaoImpl<FuncTreePO, String> implements 
      *  @history
      */
     public String generateFuncTreeSort(FuncTreeVO funcTreeVO) {
-        String sort = "01-";
+        String parentSort = "";
+        Long maxNum = 1L;
         Session sess = getSession();
         Criteria criteria = sess.createCriteria(FuncTreePO.class);
         criteria.add(Restrictions.eq("parentID", funcTreeVO.getParentID()));
@@ -137,31 +139,60 @@ public class FuncTreeDaoImpl extends BaseDaoImpl<FuncTreePO, String> implements 
         criteria.setMaxResults(1);
         List<FuncTreePO> poList = criteria.list();
         if (poList != null && !poList.isEmpty()) {
+            // 存在兄弟节点
             FuncTreePO funcTreePO = poList.get(0);
-            sort = funcTreePO.getSort();
-            String[] sortPath = sort.split("-");
-            String tempSort = "";
+            String brotherSort = funcTreePO.getSort();
+            String[] sortPath = brotherSort.split("-");
             if (sortPath.length > 0) {
                 for (int i = 0; i < sortPath.length - 1; i++) {
-                    tempSort = tempSort + sortPath[i] + "-";
+                    parentSort = parentSort + sortPath[i] + "-";
                 }
-                int maxNum = Integer.valueOf(sortPath[sortPath.length - 1]) + 1;
-                if (maxNum > 9) {
-                    tempSort = tempSort + maxNum + "-";
-                }
-                else {
-                    tempSort = tempSort + "0" + maxNum + "-";
-                }
-                sort = tempSort;
+                maxNum = Long.valueOf(sortPath[sortPath.length - 1], 16) + 1;
             }
         }
         else {
+            // 不存在兄弟节点
             FuncTreePO parentFuncTreePO = this.get(funcTreeVO.getParentID());
             if (parentFuncTreePO != null) {
-                sort = parentFuncTreePO.getSort() + "01-";
+                parentSort = parentFuncTreePO.getSort();
             }
         }
-        return sort;
+        return (parentSort + Long.toHexString(maxNum) + "-").toUpperCase();
+    }
+
+    /**
+     * 
+     *  校验功能下是否存在功能(是否为叶子节点)
+     *  @param funcTreeVO
+     *  @return
+     *  @author Administrator
+     *  @created 2014年3月10日 上午6:13:03
+     *  @lastModified       
+     *  @history
+     */
+    public boolean checkFuncTreeHasChild(FuncTreeVO funcTreeVO) {
+        Session session = getSession();
+        Criteria criteria = session.createCriteria(FuncTreePO.class);
+        criteria.add(Restrictions.eq("parentID", funcTreeVO.getId()));
+        Long total = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+        return total > 0 ? true : false;
+    }
+
+    /**
+     * 
+     *  删除角色功能树关联关系
+     *  @param id
+     *  @author Administrator
+     *  @created 2014年3月10日 上午6:26:36
+     *  @lastModified       
+     *  @history
+     */
+    public void deleteRoleFuncTree(String funcTreeID) {
+        Session session = getSession();
+        String hqlDelete = "delete RoleFuncTreePO po where po.funcTreeID = :funcTreeID";
+        Query query = session.createQuery(hqlDelete);
+        query.setParameter("funcTreeID", funcTreeID);
+        query.executeUpdate();
     }
 
 }

@@ -10,6 +10,7 @@ import com.maodr.framework.util.StringUtil;
 import com.maodr.system.functree.dao.FuncTreeDao;
 import com.maodr.system.functree.vo.FuncTreeVO;
 import com.maodr.system.model.FuncTreePO;
+import com.maodr.system.org.vo.OrgVO;
 
 /**
  * 
@@ -108,6 +109,16 @@ public class FuncTreeServiceImpl implements FuncTreeService {
      *  @history
      */
     public void deleteFuncTree(String id) {
+        FuncTreeVO funcTreeVO = this.getFuncTree(id);
+        // 校验机构下是否存在机构
+        if (funcTreeDao.checkFuncTreeHasChild(funcTreeVO)) {
+            throw new BusinessException("{0}功能下存在其他功能,不能删除", new String[] { funcTreeVO.getName() });
+        }
+        
+        // 删除角色功能树关联表
+        funcTreeDao.deleteRoleFuncTree(id);
+        
+        // 删除功能
         funcTreeDao.remove(id);
     }
 
