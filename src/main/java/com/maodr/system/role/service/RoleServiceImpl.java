@@ -45,7 +45,7 @@ public class RoleServiceImpl implements RoleService {
 
         // 校验机构名称重复    
         if (roleDao.checkRoleNameExist(roleVO)) {
-            throw new BusinessException("名称为{0}的角色已存在", new String[] { roleVO.getRoleCode() });
+            throw new BusinessException("名称为{0}的角色已存在", new String[] { roleVO.getRoleName() });
         }
         return roleDao.saveOrUpdateRole(roleVO);
     }

@@ -17,6 +17,12 @@
 			document.roleForm.action =url;
 			document.roleForm.submit();
 		}
+		// 修改角色
+		function editRole(roleID) {
+			var url = '<s:url value='/role/editRole'/>'+'?role.id='+roleID;
+			document.roleForm.action =url;
+			document.roleForm.submit();
+		}
 		// 删除角色
 		function deleteRole(roleID) {
 			var url = '<s:url value='/role/deleteRole'/>'+'?role.id='+roleID;
@@ -48,6 +54,9 @@
 				<display:column title="">
 					<a onclick="listRoleFuncTree('${role.id}');">权限设置</a>
 		        </display:column>
+		        <display:column title="" media="html">
+		        	<a onclick="editRole('${role.id}');">修改</a>
+		        </display:column>	
 		        <display:column title="" media="html">
 		        	<a onclick="deleteRole('${role.id}');">删除</a>
 		        </display:column>		

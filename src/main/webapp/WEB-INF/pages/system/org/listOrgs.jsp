@@ -110,6 +110,7 @@
 				</sx:tree>
 			</div>
 			<div class="span10" id="mainFrame"></div>
+			<s:form name="orgForm" action="/org/deleteOrg" method="post"></s:form>
 		</div>
 	</div>
 </body>

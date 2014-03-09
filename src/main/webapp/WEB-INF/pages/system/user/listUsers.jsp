@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		<div class="row-fluid">		
-			<display:table id="user" name="users" requestURI="" defaultsort="1" pagesize="25" 
+			<display:table id="user" name="users" requestURI="" pagesize="25" 
 				class="table table-condensed table-striped table-hover table-bordered" size="resultSize" export="false">		
 		        <display:column title="序号">${user_rowNum}</display:column>   
 				<display:column property="username" titleKey="user.username" sortable="true" escapeXml="true" url="/user/editUser?from=list" paramId="id" paramProperty="id" />

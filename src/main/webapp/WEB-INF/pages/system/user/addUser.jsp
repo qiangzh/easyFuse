@@ -9,8 +9,15 @@
 <body>
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="span2">
+			<div class="span2">			    
+				<c:choose> 
+					<c:when test="${empty user.id}">
 			    <h2><fmt:message key="signup.heading"/></h2>
+					</c:when>
+					<c:otherwise>
+				    	<h2>编辑用户信息</h2>
+				    </c:otherwise>
+			   	</c:choose>
 			    <fmt:message key="signup.message"/>
 			</div>
 			

@@ -35,7 +35,7 @@ public class FuncTreeServiceImpl implements FuncTreeService {
 
         // 校验功能树名称重复    
         if (funcTreeDao.checkFuncTreeNameExist(funcTreeVO)) {
-            throw new BusinessException("名称为{0}的功能已存在", new String[] { funcTreeVO.getCode() });
+            throw new BusinessException("名称为{0}的功能已存在", new String[] { funcTreeVO.getName() });
         }
 
         // 生成sort

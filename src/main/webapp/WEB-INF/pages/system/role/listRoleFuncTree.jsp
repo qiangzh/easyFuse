@@ -72,6 +72,7 @@
 	<div class="container-fluid">
 		<h2><fmt:message key="funcTree.list.heading" /></h2>
 		<s:hidden id="roleFuncTreeVO.roleID" key="roleFuncTreeVO.roleID" />
+		
 		<div class="row-fluid">
 			<div id="actions">
 				<a href="./listRoles" class="btn btn-mini btn-default"><i

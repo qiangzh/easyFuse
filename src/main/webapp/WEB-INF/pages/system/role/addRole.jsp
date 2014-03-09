@@ -1,5 +1,5 @@
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/taglibs.jsp" %>
-
 <head>
     <title><fmt:message key="role.add.title"/></title>
 	<meta name="menu" content="AdminMenu" />
@@ -9,7 +9,14 @@
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span2">
-			    <h2><fmt:message key="role.add.heading"/></h2>
+				<c:choose> 
+					<c:when test="${empty role.id}">
+				    	<h2><fmt:message key="role.add.heading"/></h2>
+					</c:when>
+					<c:otherwise>
+				    	<h2>编辑角色</h2>
+				    </c:otherwise>
+			   	</c:choose>
 			    <fmt:message key="role.add.message"/>
 			</div>
 			

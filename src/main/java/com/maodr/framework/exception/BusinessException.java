@@ -1,6 +1,5 @@
 package com.maodr.framework.exception;
 
-
 /**
  * 
  *  业务异常类
@@ -9,29 +8,13 @@ package com.maodr.framework.exception;
  *  @lastModified       
  *  @history
  */
-public class BusinessException extends RuntimeException {
+public class BusinessException extends BaseException {
 
-    private static final long serialVersionUID = 2636146773023628669L;   
+    private static final long serialVersionUID = 2636146773023628669L;
 
     private String key; // TODO 异常代码，国际化使用
 
     private Object[] params;// 参数信息
-
-    public BusinessException() {
-        super();
-    }
-
-    public BusinessException(String message, Throwable throwable) {
-        super(message, throwable);
-    }
-
-    public BusinessException(String message) {
-        super(message);
-    }
-
-    public BusinessException(Throwable throwable) {
-        super(throwable);
-    }
 
     public BusinessException(String message, Object params) {
         super(message);
@@ -43,11 +26,7 @@ public class BusinessException extends RuntimeException {
         this.params = params;
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public Object[] getValues() {
+    public Object[] getParams() {
         return params;
     }
 }

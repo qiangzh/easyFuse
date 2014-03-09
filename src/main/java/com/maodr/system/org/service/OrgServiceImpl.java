@@ -44,7 +44,7 @@ public class OrgServiceImpl implements OrgService {
 
         // 校验机构名称重复    
         if (orgDao.checkOrgNameExist(orgVO)) {
-            throw new BusinessException("名称为{0}的机构已存在", new String[] { orgVO.getCode() });
+            throw new BusinessException("名称为{0}的机构已存在", new String[] { orgVO.getName() });
         }
 
         return orgDao.saveOrUpdateOrg(orgVO);
