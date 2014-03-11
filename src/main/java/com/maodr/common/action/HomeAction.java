@@ -10,8 +10,10 @@ import com.maodr.framework.base.action.BaseAction;
  *  @lastModified       
  *  @history
  */
-public class HomeAction extends BaseAction { 
-    
+public class HomeAction extends BaseAction {
+
+    private static final long serialVersionUID = -7508744354620390189L;
+
     public String execute() {
         return SUCCESS;
     }

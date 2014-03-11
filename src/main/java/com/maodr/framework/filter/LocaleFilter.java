@@ -30,7 +30,6 @@ public class LocaleFilter extends OncePerRequestFilter {
      * @throws IOException when something goes wrong
      * @throws ServletException when a communication failure happens
      */
-    @SuppressWarnings("unchecked")
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 

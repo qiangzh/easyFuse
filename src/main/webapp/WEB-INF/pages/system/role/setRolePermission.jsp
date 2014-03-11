@@ -13,11 +13,12 @@
 	    	<s:hidden key="roleFuncTreeVO.funcTreeID"/>
 	    		    	
 	        <div class="row">
-	            <div class="span6">
+	            <div class="span6 form-inline">
 	            	<s:radio name="roleFuncTreeVO.hasPermission" listKey="label" listValue="value" required="true" autofocus="true" list="chkRolelist"></s:radio>	            
 				</div>
-	        </div>	
-	        <div id="actions" class="form-group form-actions">
+	        </div>
+
+			<div id="actions" class="form-group form-actions">
 	            <s:submit type="button" cssclass="btn btn-mini btn-primary" key="button.register" theme="simple">
 	                <i class="icon-ok icon-white"></i>
 	                <fmt:message key="button.register"/>

@@ -95,6 +95,6 @@ public interface FuncTreeDao extends BaseDao<FuncTreePO, String> {
      *  @lastModified       
      *  @history
      */
-    public void deleteRoleFuncTree(String funcTreeID);
+    public void deleteRoleFuncTreeByFuncTreeID(String funcTreeID);
 
 }

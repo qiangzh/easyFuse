@@ -145,6 +145,10 @@ public class RoleServiceImpl implements RoleService {
             throw new BusinessException("角色{0}下存在用户，不能删除", roleVO.getRoleName());
         }
 
+        // 删除角色功能树关联表
+        roleDao.deleteRoleFuncTreeByRoleID(id);
+
+        // 删除角色
         roleDao.deleteRole(id);
     }
 

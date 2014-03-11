@@ -117,4 +117,15 @@ public interface RoleDao extends BaseDao<RolePO, String> {
      */
     public boolean checkRoleNameExist(RoleVO roleVO);
 
+    /**
+     * 
+     *  删除角色功能树关联表
+     *  @param id
+     *  @author Administrator
+     *  @created 2014年3月11日 上午6:26:14
+     *  @lastModified       
+     *  @history
+     */
+    public void deleteRoleFuncTreeByRoleID(String id);
+
 }

@@ -10,7 +10,7 @@
 	<div class="container-fluid">
 		<h2><fmt:message key="activeUsers.heading"/></h2>
 		<div class="row-fluid">		
-			<display:table id="user" name="applicationScope.userNames" requestURI="" defaultsort="1" pagesize="10" 
+			<display:table id="user" name="applicationScope.userNames" requestURI="" pagesize="20" 
 				class="table table-condensed table-striped table-hover table-bordered" export="false">	
 		        <display:column title="序号">${user_rowNum}</display:column> 
 		        <display:column property="username" escapeXml="true" style="width: 30%" titleKey="user.username"

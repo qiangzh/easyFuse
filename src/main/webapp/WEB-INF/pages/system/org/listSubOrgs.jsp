@@ -12,7 +12,7 @@
 		</a>
 	</div>
 
-	<display:table id="org" name="orgs" requestURI="" defaultsort="1" pagesize="10" 
+	<display:table id="org" name="orgs" requestURI="" pagesize="20" 
 		class="table table-condensed table-striped table-hover table-bordered" export="false">		
         <display:column title="序号">${org_rowNum}</display:column> 
 		<display:column property="code" titleKey="org.name" sortable="true" escapeXml="true"/>

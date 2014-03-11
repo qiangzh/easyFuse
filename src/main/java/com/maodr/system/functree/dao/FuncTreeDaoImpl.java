@@ -187,7 +187,7 @@ public class FuncTreeDaoImpl extends BaseDaoImpl<FuncTreePO, String> implements 
      *  @lastModified       
      *  @history
      */
-    public void deleteRoleFuncTree(String funcTreeID) {
+    public void deleteRoleFuncTreeByFuncTreeID(String funcTreeID) {
         Session session = getSession();
         String hqlDelete = "delete RoleFuncTreePO po where po.funcTreeID = :funcTreeID";
         Query query = session.createQuery(hqlDelete);

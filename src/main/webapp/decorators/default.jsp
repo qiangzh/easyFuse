@@ -11,6 +11,7 @@
     <title><decorator:title/></title>
     <t:assets/>
     <decorator:head/>
+    <sb:head/>
 </head>
 <body<decorator:getProperty property="body.id" writeEntireProperty="true"/><decorator:getProperty property="body.class" writeEntireProperty="true"/>>
     <c:set var="currentMenu" scope="request"><decorator:getProperty property="meta.menu"/></c:set>

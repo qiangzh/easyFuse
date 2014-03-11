@@ -82,7 +82,7 @@
 		
 		<div class="row-fluid">
 			<div class="span2" id="leftFrame">
-				<sx:tree id="funcTree" rootNode="treeRootNode"
+				<sx:tree id="funcTree" rootNode="treeRootNode" 
 					childCollectionProperty="children" nodeIdProperty="id"
 					nodeTitleProperty="name" value="id"
 					treeSelectedTopic="treeSelected"

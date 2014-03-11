@@ -10,7 +10,6 @@ import com.maodr.framework.util.StringUtil;
 import com.maodr.system.functree.dao.FuncTreeDao;
 import com.maodr.system.functree.vo.FuncTreeVO;
 import com.maodr.system.model.FuncTreePO;
-import com.maodr.system.org.vo.OrgVO;
 
 /**
  * 
@@ -58,7 +57,7 @@ public class FuncTreeServiceImpl implements FuncTreeService {
      */
     public List<FuncTreeVO> listFuncTrees() {
         List<FuncTreePO> poList = funcTreeDao.getAllDistinct();
-        List<FuncTreeVO> voList = new ArrayList();
+        List<FuncTreeVO> voList = new ArrayList<FuncTreeVO>();
         FuncTreeVO funcTreeVO;
         for (FuncTreePO funcTreePO : poList) {
             funcTreeVO = new FuncTreeVO();
@@ -114,10 +113,10 @@ public class FuncTreeServiceImpl implements FuncTreeService {
         if (funcTreeDao.checkFuncTreeHasChild(funcTreeVO)) {
             throw new BusinessException("{0}功能下存在其他功能,不能删除", new String[] { funcTreeVO.getName() });
         }
-        
+
         // 删除角色功能树关联表
-        funcTreeDao.deleteRoleFuncTree(id);
-        
+        funcTreeDao.deleteRoleFuncTreeByFuncTreeID(id);
+
         // 删除功能
         funcTreeDao.remove(id);
     }

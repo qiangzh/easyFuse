@@ -20,7 +20,11 @@
 	        		<s:textfield key="funcTree.name" required="true" autofocus="true" cssClass="form-control"/>
 	            </div>
 	        </div>
-	        <s:radio name="funcTree.type" required="true" autofocus="true" list="#{'1':'功能菜单','0':'功能点'}"></s:radio>
+	        <div class="row">
+	            <div class="span12 form-inline">
+	        		<s:radio label="功能类别" listCssClass="control-label"  cssClass="form-control" name="funcTree.type" required="true" autofocus="true" list="#{'1':'功能菜单','0':'功能点'}"></s:radio>
+	            </div>
+	        </div>
 	        <div class="row">
 	            <div class="span12">
 	        		<s:textfield key="funcTree.url" required="true" autofocus="true" cssClass="form-control"/>

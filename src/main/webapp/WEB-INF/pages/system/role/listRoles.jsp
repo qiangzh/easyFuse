@@ -43,21 +43,21 @@
 			</div>
 		</div>		
 		<div class="row-fluie">
-			<display:table id="role" name="roles" requestURI="" defaultsort="1" pagesize="25" 
+			<display:table id="role" name="roles" requestURI="" pagesize="20" 
 				class="table table-condensed table-striped table-hover table-bordered" size="resultSize" export="false">		
 		        <display:column title="序号">${role_rowNum}</display:column>   
-				<display:column property="roleCode" titleKey="role.code" sortable="true" escapeXml="true" url="/role/editRole?from=list" paramId="role.id" paramProperty="id" />
-				<display:column property="roleName" titleKey="role.name" sortable="true" autolink="true" media="html" />		
+				<display:column property="roleCode" titleKey="role.code" />
+				<display:column property="roleName" titleKey="role.name" />		
 				<display:column title="" media="html">
 					<a onclick="viewUser('${role.id}');">查看已分配用户</a>
 		        </display:column>		        		
 				<display:column title="">
 					<a onclick="listRoleFuncTree('${role.id}');">权限设置</a>
 		        </display:column>
-		        <display:column title="" media="html">
+		        <display:column title="" >
 		        	<a onclick="editRole('${role.id}');">修改</a>
 		        </display:column>	
-		        <display:column title="" media="html">
+		        <display:column title="">
 		        	<a onclick="deleteRole('${role.id}');">删除</a>
 		        </display:column>		
 				<display:setProperty name="paging.banner.item_name">&nbsp;</display:setProperty>

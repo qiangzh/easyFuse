@@ -9,7 +9,7 @@
 	<div class="container-fluid">
 		<h2>已分配用户</h2>		
 		<div class="row-fluid">	
-			<display:table id="user" name="users" requestURI="" defaultsort="1" pagesize="25" 
+			<display:table id="user" name="users" requestURI="" pagesize="20" 
 				class="table table-condensed table-striped table-hover table-bordered" size="resultSize" export="false">		
 		        <display:column title="序号">${user_rowNum}</display:column>   
 				<display:column property="username" titleKey="user.username" sortable="true" escapeXml="true"/>

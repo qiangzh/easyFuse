@@ -204,4 +204,21 @@ public class RoleDaoImpl extends BaseDaoImpl<RolePO, String> implements RoleDao 
         Long total = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
         return total > 0 ? true : false;
     }
+
+    /**
+     * 
+     *  删除角色功能树关联表
+     *  @param id
+     *  @author Administrator
+     *  @created 2014年3月11日 上午6:26:14
+     *  @lastModified       
+     *  @history
+     */
+    public void deleteRoleFuncTreeByRoleID(String roleID) {
+        Session session = getSession();
+        String hqlDelete = "delete RoleFuncTreePO po where po.roleID = :roleID";
+        Query query = session.createQuery(hqlDelete);
+        query.setParameter("roleID", roleID);
+        query.executeUpdate();
+    }
 }
