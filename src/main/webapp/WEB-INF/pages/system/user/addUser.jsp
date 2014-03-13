@@ -29,16 +29,16 @@
 			    	    
 			        <div class="row">
 			            <div class="span6">	
-			        		<s:textfield key="user.username" required="true" autofocus="true" cssClass="form-control"/>
+			        		<s:textfield key="user.username" cssClass="form-control" required="true" maxLength="32"/>
 			        	</div>
-			        </div>	 
+			        </div>	
 			               	
 			        <div class="row">
 			            <div class="span6">
-			                <s:password key="user.password" showPassword="true" required="true" cssClass="form-control"/>
+			                <s:password key="user.password" cssClass="form-control" required="true" showPassword="true" maxLength="32"/>
 			            </div>
 			            <div class="span6">
-			                <s:password key="user.confirmPassword" required="true" showPassword="true" cssClass="form-control"/>
+			                <s:password key="user.confirmPassword" cssClass="form-control" required="true" showPassword="true" maxLength="32"/>
 			            </div>
 			        </div>
 			
@@ -67,8 +67,7 @@
 					</div>		
 					<div id="actions" class="form-group form-actions">
 			            <s:submit type="button" cssclass="btn btn-mini btn-primary" key="button.register" theme="simple">
-			                <i class="icon-ok icon-white"></i>
-			                <fmt:message key="button.register"/>
+			                <i class="icon-ok icon-white"></i>保存
 			            </s:submit>
 			            <a href="./listUsers" class="btn btn-mini btn-default"><i class="icon-remove"></i><fmt:message key="button.cancel"/></a>
 			        </div>

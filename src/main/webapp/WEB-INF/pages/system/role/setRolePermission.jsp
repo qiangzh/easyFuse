@@ -5,8 +5,9 @@
     <title><fmt:message key="signup.title"/></title>
 </head>
 
-<body class="signup">	
+<body>	
 	<div>
+		<c:if test="${'0' ne roleFuncTreeVO.funcTreeID}">
 	    <s:form name="roleForm" action="/role/saveRolePermission" method="post" validate="true" autocomplete="off" cssClass="well form-horizontal">
 	    	<s:hidden key="roleFuncTreeVO.id"/>	
 	    	<s:hidden key="roleFuncTreeVO.roleID"/>
@@ -25,5 +26,6 @@
 	            </s:submit>
 	        </div>
 	    </s:form>
+	    </c:if>
 	</div>
 </body>

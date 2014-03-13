@@ -29,6 +29,18 @@ public interface UserService {
     
     /**
      * 
+     *  保存User编辑信息
+     *  @param userVO
+     *  @return
+     *  @author Administrator
+     *  @created 2013年12月31日 上午4:39:37
+     *  @lastModified       
+     *  @history
+     */
+    public String saveUserProfile(UserVO userVO);
+    
+    /**
+     * 
      *  显示用户
      *  @return
      *  @author Administrator

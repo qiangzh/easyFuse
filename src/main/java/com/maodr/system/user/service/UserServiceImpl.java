@@ -27,6 +27,16 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
+    /**
+     * 
+     *  保存User
+     *  @param userVO
+     *  @return
+     *  @author Administrator
+     *  @created 2013年12月31日 上午4:39:37
+     *  @lastModified       
+     *  @history
+     */
     public String saveUser(UserVO userVO) {
         // 保存或更新User信息
         String userID = userDao.saveOrUpdateUser(userVO);
@@ -38,6 +48,22 @@ public class UserServiceImpl implements UserService {
         userDao.saveUserRole(userID, userVO.getRoleList());
 
         return userID;
+    }
+
+    /**
+     * 
+     *  保存User编辑信息
+     *  @param userVO
+     *  @return
+     *  @author Administrator
+     *  @created 2013年12月31日 上午4:39:37
+     *  @lastModified       
+     *  @history
+     */
+    public String saveUserProfile(UserVO userVO) {
+        String userID = userDao.saveOrUpdateUser(userVO);
+        return userID;
+
     }
 
     /**

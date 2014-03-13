@@ -20,9 +20,9 @@
 			<display:table id="user" name="users" requestURI="" pagesize="20" 
 				class="table table-condensed table-striped table-hover table-bordered" size="resultSize" export="false">		
 		        <display:column title="序号">${user_rowNum}</display:column>   
-				<display:column property="username" titleKey="user.username" sortable="true" escapeXml="true" url="/user/editUser?from=list" paramId="id" paramProperty="id" />
-				<display:column property="email" titleKey="user.email" sortable="true" autolink="true" media="html" />
-				<display:column sortProperty="enabled" titleKey="user.enabled" sortable="true" media="html">
+				<display:column property="username" titleKey="user.username" url="/user/editUser?from=list" paramId="id" paramProperty="id" />
+				<display:column property="email" titleKey="user.email"/>
+				<display:column sortProperty="enabled" titleKey="user.enabled">
 					<input type="checkbox" disabled="disabled" <c:if test="${user.enabled}">checked="checked"</c:if> />
 				</display:column>
 		

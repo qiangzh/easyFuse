@@ -82,7 +82,7 @@
 		function editTreeNode(treeNodeID, childNodeID) {
 			dojo.io.bind({
 				url : "<s:url value='/functree/editFuncTree'/>",
-				content : {'treeNode.id' : treeNodeID,'id' : childNodeID},
+				content : {'treeNode.id' : treeNodeID,'funcTree.id' : childNodeID},
 				load : function(type, data, evt) {
 					document.getElementById('mainFrame').innerHTML = data;
 				},

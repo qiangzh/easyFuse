@@ -204,7 +204,7 @@ public class UserAction extends BaseAction {
      *  @history
      */
     public String saveUserProfile() {
-        userService.saveUser(user);
+        userService.saveUserProfile(user);
         return "cancel";
     }
 

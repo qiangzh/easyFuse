@@ -105,10 +105,8 @@ public class FuncTreeAction extends BaseAction {
      *  @lastModified       
      *  @history
      */
-    public String editFuncTree() {
-        HttpServletRequest request = getRequest();
-        String id = request.getParameter("id");
-        funcTree = funcTreeService.getFuncTree(id);
+    public String editFuncTree() {        
+        funcTree = funcTreeService.getFuncTree(funcTree.getId());
         return "addFuncTree";
     }
     
