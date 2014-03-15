@@ -13,9 +13,7 @@
 			<display:table id="user" name="applicationScope.userNames" requestURI="" pagesize="20" 
 				class="table table-condensed table-striped table-hover table-bordered" export="false">	
 		        <display:column title="序号">${user_rowNum}</display:column> 
-		        <display:column property="username" escapeXml="true" style="width: 30%" titleKey="user.username"
-		                        sortable="true"/>
-		        <display:column property="email" titleKey="user.email" sortable="true" autolink="true" media="html" />		
+		        <display:column property="username" titleKey="user.username" sortable="true"/>	
 		        <display:setProperty name="paging.banner.item_name" value="user"/>
 		        <display:setProperty name="paging.banner.items_name" value="users"/>
 		    </display:table>

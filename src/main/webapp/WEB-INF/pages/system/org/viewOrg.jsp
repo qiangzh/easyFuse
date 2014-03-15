@@ -5,7 +5,7 @@
     <title><fmt:message key="signup.title"/></title>
 </head>
 
-<body class="signup">	
+<body>	
 	<div>
 	    <s:form name="userForm" action="/org/saveOrg" method="post" validate="true" autocomplete="off" cssClass="well form-horizontal">
 	    	<s:hidden key="org.id"/>

@@ -16,9 +16,8 @@ import org.springframework.security.authentication.AuthenticationTrustResolverIm
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
-
-import com.maodr.system.user.vo.UserVO;
 
 public class UserCounterListener implements ServletContextListener, HttpSessionAttributeListener, HttpSessionListener {
 
@@ -32,26 +31,75 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
 
     private int counter;
 
-    private Set<UserVO> users;
+    private Set<User> users;
 
+    @Override
     public synchronized void contextInitialized(ServletContextEvent sce) {
         servletContext = sce.getServletContext();
         servletContext.setAttribute((COUNT_KEY), Integer.toString(counter));
     }
 
+    @Override
     public synchronized void contextDestroyed(ServletContextEvent event) {
         servletContext = null;
         users = null;
         counter = 0;
     }
 
-    synchronized void incrementUserCounter() {
+    @Override
+    public void attributeAdded(HttpSessionBindingEvent event) {
+        if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
+            SecurityContext securityContext = (SecurityContext) event.getValue();
+            if (securityContext != null && securityContext.getAuthentication().getPrincipal() instanceof User) {
+                User user = (User) securityContext.getAuthentication().getPrincipal();
+                addUsername(user);
+            }
+        }
+    }
+
+    @Override
+    public void attributeRemoved(HttpSessionBindingEvent event) {
+        if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
+            SecurityContext securityContext = (SecurityContext) event.getValue();
+            Authentication auth = securityContext.getAuthentication();
+            if (auth != null && (auth.getPrincipal() instanceof User)) {
+                User user = (User) auth.getPrincipal();
+                removeUsername(user);
+            }
+        }
+    }
+
+    @Override
+    public void attributeReplaced(HttpSessionBindingEvent event) {
+        if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
+            final SecurityContext securityContext = (SecurityContext) event.getValue();
+            if (securityContext.getAuthentication() != null
+                    && securityContext.getAuthentication().getPrincipal() instanceof User) {
+                final User user = (User) securityContext.getAuthentication().getPrincipal();
+                addUsername(user);
+            }
+        }
+    }
+
+    @Override
+    public void sessionCreated(HttpSessionEvent se) {
+    }
+
+    @Override
+    public void sessionDestroyed(HttpSessionEvent se) {
+        Object obj = se.getSession().getAttribute(EVENT_KEY);
+        if (obj != null) {
+            se.getSession().removeAttribute(EVENT_KEY);
+        }
+    }
+
+    private synchronized void incrementUserCounter() {
         counter = Integer.parseInt((String) servletContext.getAttribute(COUNT_KEY));
         counter++;
         servletContext.setAttribute(COUNT_KEY, Integer.toString(counter));
     }
 
-    synchronized void decrementUserCounter() {
+    private synchronized void decrementUserCounter() {
         int counter = Integer.parseInt((String) servletContext.getAttribute(COUNT_KEY));
         counter--;
 
@@ -63,11 +111,11 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
     }
 
     @SuppressWarnings("unchecked")
-    synchronized void addUsername(UserVO user) {
-        users = (Set<UserVO>) servletContext.getAttribute(USERS_KEY);
+    private synchronized void addUsername(User user) {
+        users = (Set<User>) servletContext.getAttribute(USERS_KEY);
 
         if (users == null) {
-            users = new LinkedHashSet<UserVO>();
+            users = new LinkedHashSet<User>();
         }
 
         if (!users.contains(user)) {
@@ -78,8 +126,8 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
     }
 
     @SuppressWarnings("unchecked")
-    synchronized void removeUsername(UserVO user) {
-        users = (Set<UserVO>) servletContext.getAttribute(USERS_KEY);
+    private synchronized void removeUsername(User user) {
+        users = (Set<User>) servletContext.getAttribute(USERS_KEY);
 
         if (users != null) {
             users.remove(user);
@@ -87,16 +135,6 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
 
         servletContext.setAttribute(USERS_KEY, users);
         decrementUserCounter();
-    }
-
-    public void attributeAdded(HttpSessionBindingEvent event) {
-        if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
-            SecurityContext securityContext = (SecurityContext) event.getValue();
-            if (securityContext != null && securityContext.getAuthentication().getPrincipal() instanceof UserVO) {
-                UserVO user = (UserVO) securityContext.getAuthentication().getPrincipal();
-                addUsername(user);
-            }
-        }
     }
 
     private boolean isAnonymous() {
@@ -107,37 +145,5 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
             return resolver.isAnonymous(auth);
         }
         return true;
-    }
-
-    public void attributeRemoved(HttpSessionBindingEvent event) {
-        if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
-            SecurityContext securityContext = (SecurityContext) event.getValue();
-            Authentication auth = securityContext.getAuthentication();
-            if (auth != null && (auth.getPrincipal() instanceof UserVO)) {
-                UserVO user = (UserVO) auth.getPrincipal();
-                removeUsername(user);
-            }
-        }
-    }
-
-    public void attributeReplaced(HttpSessionBindingEvent event) {
-        if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
-            final SecurityContext securityContext = (SecurityContext) event.getValue();
-            if (securityContext.getAuthentication() != null
-                    && securityContext.getAuthentication().getPrincipal() instanceof UserVO) {
-                final UserVO user = (UserVO) securityContext.getAuthentication().getPrincipal();
-                addUsername(user);
-            }
-        }
-    }
-
-    public void sessionCreated(HttpSessionEvent se) {
-    }
-
-    public void sessionDestroyed(HttpSessionEvent se) {
-        Object obj = se.getSession().getAttribute(EVENT_KEY);
-        if (obj != null) {
-            se.getSession().removeAttribute(EVENT_KEY);
-        }
     }
 }
