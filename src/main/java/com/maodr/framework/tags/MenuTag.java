@@ -1,27 +1,32 @@
 package com.maodr.framework.tags;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import com.maodr.framework.context.UserContext;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.maodr.framework.Constants;
 import com.maodr.system.functree.vo.FuncTreeVO;
+import com.opensymphony.xwork2.ActionContext;
 
 public class MenuTag extends TagSupport {
 
     private static final long serialVersionUID = 1L;
 
+    private static Log log = LogFactory.getLog(MenuTag.class);
+
     public int doStartTag() throws JspException {
         JspWriter writer = pageContext.getOut();
         try {
             StringBuffer sb = new StringBuffer();
-            UserContext userContext  =UserContext.getCurrentContext();
-            List mainMenuList = UserContext.getCurrentContext().getMenuList();
-            String contextPath =userContext.getContextPath();
+            List mainMenuList = (List) ActionContext.getContext().getSession().get(Constants.MENU_REPOSITORY_KEY);
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(org.apache.struts2.StrutsStatics.HTTP_REQUEST);
+            String contextPath = request.getContextPath();
             if (mainMenuList != null && !mainMenuList.isEmpty()) {
                 for (int i = 0, n = mainMenuList.size(); i < n; i++) {
                     FuncTreeVO funcTreeVO = (FuncTreeVO) mainMenuList.get(i);
@@ -64,16 +69,16 @@ public class MenuTag extends TagSupport {
 
                 }
             }
-
             writer.print(sb.toString());
         }
-        catch (IOException e) {
+        catch (Exception e) {
+            log.error(e.getMessage(), e);
             throw new JspException(e.toString());
         }
         return SKIP_BODY;
     }
 
-    private void test() {
+    private StringBuffer getTest() {
         StringBuffer sb = new StringBuffer();
 
         // 一级菜单
@@ -107,5 +112,6 @@ public class MenuTag extends TagSupport {
         sb.append(" </ul>");
 
         sb.append("</li>");
+        return sb;
     }
 }

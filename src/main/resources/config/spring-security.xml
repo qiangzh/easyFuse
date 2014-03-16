@@ -18,8 +18,8 @@
 		<intercept-url pattern="/home/**" access="ROLE_USER" />			
         <intercept-url pattern="/**/*.action*" access="ROLE_ADMIN,ROLE_USER"/>
         <form-login login-page="/login" authentication-success-handler-ref="authenticationSuccessHandler" authentication-failure-url="/login?error=true" login-processing-url="/j_security_check"/>
-        <session-management>
-        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="false"/> 
+        <session-management invalid-session-url="/login">
+        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/login"/> 
         </session-management>
         <custom-filter ref="securityFilter" before="FILTER_SECURITY_INTERCEPTOR" />
         <!-- <access-denied-handler ref="accessDeniedHandler" error-page="/WEB-INF/pages/error/error.jsp"/> -->   

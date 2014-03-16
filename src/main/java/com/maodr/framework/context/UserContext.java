@@ -32,18 +32,6 @@ public class UserContext {
         us.contextPath = request.getContextPath();
     }
 
-    public List getMenuList() {
-        List menuList = (List) this.getSessionAttribute(Constants.MENU_REPOSITORY_KEY);
-        if (menuList == null) {
-            menuList = new ArrayList();
-        }
-        return menuList;
-    }
-
-    public void setMenuList(List menuList) {
-        this.setSessionAttribute(Constants.MENU_REPOSITORY_KEY, (Serializable) menuList);
-    }
-
     static public UserContext getCurrentContext() {
         return (UserContext) threadLocal.get();
     }

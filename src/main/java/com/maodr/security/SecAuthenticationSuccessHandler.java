@@ -20,7 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.maodr.framework.context.UserContext;
+import com.maodr.framework.Constants;
 import com.maodr.framework.util.ApplicationContextProvider;
 import com.maodr.system.functree.vo.FuncTreeVO;
 import com.maodr.system.user.service.UserService;
@@ -41,7 +41,8 @@ public class SecAuthenticationSuccessHandler implements AuthenticationSuccessHan
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
-        setMenu(user);
+        List mainMenuList = this.getMenu(user);
+        request.getSession().setAttribute(Constants.MENU_REPOSITORY_KEY, mainMenuList); 
         // 跳转到主页
         response.sendRedirect("home");
     }
@@ -55,7 +56,7 @@ public class SecAuthenticationSuccessHandler implements AuthenticationSuccessHan
      *  @lastModified       
      *  @history
      */
-    private void setMenu(User user) {
+    private List getMenu(User user) {
         ServletContext ctx = ApplicationContextProvider.getServletContext();
 
         MenuRepository defaultRepository = (MenuRepository) ctx.getAttribute(MenuRepository.MENU_REPOSITORY_KEY);
@@ -93,8 +94,7 @@ public class SecAuthenticationSuccessHandler implements AuthenticationSuccessHan
             }
         }
         List mainMenuList = menuMap.get("0");
-        UserContext.getCurrentContext().setMenuList(mainMenuList);
-
+        return mainMenuList;   
     }
 
     private void setDefaultMenu() {
